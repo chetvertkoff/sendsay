@@ -1,5 +1,6 @@
 import React  from 'react';
 import AuthForm from '../Components/AuthForm';
+import Loader from '../Components/Loader';
 
 const Auth = ()=>{
   return(
@@ -27,7 +28,10 @@ const Auth = ()=>{
             <input type="password" className="form__input-text form__input-text_pass"/>
           </label>
 
-          <button onClick={event=>event.preventDefault()} className="button form__button">Войти</button>
+          <button onClick={event=>event.preventDefault()} className="button form__button">
+            <span>Вход</span>
+            <Loader />
+          </button>
         </form>
         <a href="https://github.com/chetvertkoff/sendsay" className="link auth__link">@chetvertkoff</a>
       </div>
