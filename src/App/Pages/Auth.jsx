@@ -29,7 +29,7 @@ const Auth = ()=>{
           </label>
 
           <button onClick={event=>event.preventDefault()} className="button form__button">
-            <span>Вход</span>
+            <span className="button__text">Вход</span>
             <Loader />
           </button>
         </form>

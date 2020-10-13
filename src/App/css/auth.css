@@ -25,7 +25,7 @@ h3{
 }
 
 .logo .logo_ellipse{
-  clip-path: circle(50% at 51% 50%);
+  clip-path: circle(49% at 51% 51%);
   background: rgba(0, 0, 0, 0.2);
 }
 
@@ -121,9 +121,10 @@ h3{
   border-radius: 5px;
   color: #fff;
   font-size: 14px;
-  padding: 5px 25px;
+  /* padding: 10px 25px; */
   cursor: pointer;
   min-width: 100px;
+  min-height: 36px;
 }
 
 .button:hover{
