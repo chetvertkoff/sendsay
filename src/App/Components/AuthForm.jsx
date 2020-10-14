@@ -1,39 +1,63 @@
-import React  from 'react';
-import Loader from './Loader';
+import React, { useState }  from 'react';
+import Button from './UI/Button';
+import MessageErr from './UI/MessageErr';
+import TextInput from './UI/TextInput';
 
 const AuthForm = props => {
+
+  const [login, setLogin] = useState({val:"", err: false});
+  const [subLgn, setSubLgn] = useState({val:"", err: false});
+  const [pass, setPass] = useState({val:"", err: false});
+
+  const checkField = val => {
+    
+  }
+
+  const validateFields = val =>{
+    let isValid;
+    if(!validateField(login.val)){
+      setLogin({...login, err: true});
+      isValid = false;
+    }
+    if(!validateField(subLgn.val)){
+      setSubLgn({...subLgn, err: true});
+    }
+    if(!validateField(pass.val)){
+      setPass({...pass, err: true});
+    }
+  }
+
+  const getFormData = () => {
+
+  }
+
   return(
     <form className="form auth__form">
       <h3 className="form__title">API-консолька</h3>
-      <div className="message form__message">
-        <div className="message__left-block">
-          <svg className="icon icon_smile">
-              <use xlinkHref="/assets/icon/sprite.svg#smile"></use>
-          </svg>
-        </div>
-        <div className="message__right-block">
-          <h4 className="h5 message__h5">Вход не вышел</h4>
-          <p className="message__text">id: "error/auth/failed", explain: "wrong_credentials"</p>
-        </div>
-      </div>
-      <label className="label form__label">
-        <span className="label__text_left">Логин</span>
-        <input type="text" className="form__input-text"/>
-      </label>
-      <label className="label form__label">
-        <span className="label__text label__text_left">Сублогин</span>
-        <span className="label__text label__text_right label__text_option">Опционально</span>
-        <input type="text" className="form__input-text"/>
-      </label>
-      <label className="label form__label">
-        <span className="label__text_left">Пароль</span>
-        <input type="password" className="form__input-text form__input-text_pass"/>
-      </label>
-
-      <button onClick={event=>event.preventDefault()} className="button form__button">
-        <span className="button__text">Войти</span>
-        <Loader />
-      </button>
+      {/* <MessageErr /> */}
+      <TextInput 
+        labelText="Логин" 
+        inputType="text" 
+        value={login.val} 
+        inValid={login.err}
+        getText={val=>setLogin({...login,val})} 
+      />
+      <TextInput 
+        labelText="Сублогин" 
+        inputType="text" 
+        value={subLgn.val} 
+        inValid={subLgn.err}
+        optionText="Опционально" 
+        getText={val=>setSubLgn({...subLgn,val})} 
+      />
+      <TextInput 
+        labelText="Пароль" 
+        inputType="password" 
+        value={pass.val} 
+        inValid={pass.err} 
+        getText={val=>setPass({...pass,val})} 
+      />
+      <Button load={false} onClick={getFormData} title="Войти" />
     </form>
   )
 }
