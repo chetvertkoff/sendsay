@@ -81,7 +81,9 @@ module.exports = {
     }),
     new CopyWebpackPlugin({
       patterns: [
-        { from: `${PATHS.src}/`, to: '/assets' }
+        { from: `${PATHS.src}/`, to: '/assets' },
+        {from: `${PATHS.src}/${PATHS.assets}icon`,
+        to: `${PATHS.assets}icon`}
       ]
     }),
     new CleanWebpackPlugin()

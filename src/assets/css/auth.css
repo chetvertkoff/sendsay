@@ -11,7 +11,7 @@ h3{
 
 .auth .auth__container{
   min-height: 390px;
-  min-width: 350px;
+  min-width: 440px;
 }
 
 .logo{
@@ -54,6 +54,43 @@ h3{
   color: #0D0D0D;
   margin: 0 0 10px 0;
   font-weight: normal;
+}
+
+.form .form__message {
+  background-color: rgba(207, 44, 0, 0.1);
+  padding: 10px;
+  border-radius: 4px;
+  margin: 10px 0 10px;
+}
+
+.form .form__message .message__left-block, .form .form__message .message__right-block{
+  display: inline-block;
+}
+
+.form .form__message .message__left-block{
+  vertical-align: top;
+  margin: 0 8px 0 0;
+}
+
+.form .form__message .message__h5{
+  font-size: 1em;
+  font-weight: 600;
+}
+
+.form .form__message .message__right-block{
+  color: #CF2C00;
+}
+
+.form .form__message .message__right-block .message__text{
+  font-size: 0.7em;
+}
+
+.icon{
+  fill: transparent;
+  display: block;
+  font-size: 12px;
+  width: 2em;
+  height: 2em; 
 }
 
 .form .form__label{

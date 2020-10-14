@@ -1,3 +1,3 @@
-import './App/css/index.css';
+import './assets/css/index.css';
 import './App/App';
 
