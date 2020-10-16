@@ -1,34 +1,28 @@
-import React, { useState }  from 'react';
+import React, { isValidElement, useState }  from 'react';
+import getModel from '../utils/Factory';
+import isValid from '../utils/validate';
+import Validate from '../utils/validate';
 import Button from './UI/Button';
 import MessageErr from './UI/MessageErr';
 import TextInput from './UI/TextInput';
 
 const AuthForm = props => {
 
-  const [login, setLogin] = useState({val:"", err: false});
-  const [subLgn, setSubLgn] = useState({val:"", err: false});
-  const [pass, setPass] = useState({val:"", err: false});
+  const [state, setState] = useState({
+    login: getModel('formFields'),
+    subLgn: getModel('formFields'),
+    pass: getModel('formFields'),
+    isErr: false
+  })
 
-  const checkField = val => {
-    
-  }
 
-  const validateFields = val =>{
-    let isValid;
-    if(!validateField(login.val)){
-      setLogin({...login, err: true});
-      isValid = false;
-    }
-    if(!validateField(subLgn.val)){
-      setSubLgn({...subLgn, err: true});
-    }
-    if(!validateField(pass.val)){
-      setPass({...pass, err: true});
-    }
+  const getFieldVal = (obj)=>{
+    const {type, val, err} = isValid(obj);
+    setState({...state, [type]:{val, err}, err});
   }
 
   const getFormData = () => {
-
+    console.log(state);
   }
 
   return(
@@ -38,24 +32,24 @@ const AuthForm = props => {
       <TextInput 
         labelText="Логин" 
         inputType="text" 
-        value={login.val} 
-        inValid={login.err}
-        getText={val=>setLogin({...login,val})} 
+        value={state.login.val} 
+        inValid={state.login.err}
+        getText={val=>getFieldVal({val,type: 'login'})} 
       />
       <TextInput 
         labelText="Сублогин" 
         inputType="text" 
-        value={subLgn.val} 
-        inValid={subLgn.err}
+        value={state.subLgn.val} 
+        inValid={state.subLgn.err}
         optionText="Опционально" 
-        getText={val=>setSubLgn({...subLgn,val})} 
+        getText={val=>getFieldVal({val,type: 'subLgn'})} 
       />
       <TextInput 
         labelText="Пароль" 
         inputType="password" 
-        value={pass.val} 
-        inValid={pass.err} 
-        getText={val=>setPass({...pass,val})} 
+        value={state.pass.val} 
+        inValid={state.pass.err} 
+        getText={val=>getFieldVal({val,type: 'pass'})} 
       />
       <Button load={false} onClick={getFormData} title="Войти" />
     </form>
