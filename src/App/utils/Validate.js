@@ -1,27 +1,25 @@
 class Validate{
 
-  constructor({val, type}){
-    this.type = type;
-    this.val = val;
-    this.err = false
+  constructor(obj){
+    this.data = {...obj, err: false}
   }
 
-  login(){
-    return /[a-zA-Z]/.test(this.val);
+  _login(){
+    return !/[a-zA-Z@_0-9]/g.test(this.data.val);
   }
 
-  #pass(){
-
+  _pass(){
+    return !/^((?![а-яА-Я]).)*$/g.test(this.data.val);
   }
 
-  #subLgn(){
-
+  _subLgn(){
+    return this._login();
   }
 
   isValidField(){
-    const type = this.type;
-    console.log(this[type]());
-    return this[type]();
+    const type = '_'+this.data.type;
+    const isErr = this[type]();
+    return {...this.data, err: isErr}
   }  
 }
 
