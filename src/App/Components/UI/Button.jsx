@@ -10,7 +10,7 @@ const Button = props => {
   }
 
   return (
-    <button onClick={clickEvent} className="button form__button">
+    <button onClick={clickEvent} className={`button form__button ${props.disabled && "button_disabled"}`}>
       <span className="button__text">{props.title}</span>
       {props.load && <Loader />}
     </button>
