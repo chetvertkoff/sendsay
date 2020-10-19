@@ -1,36 +1,42 @@
 import React, { useState }  from 'react';
-import getModel from '../utils/Factory';
 import Validate from '../utils/validate';
 import Button from './UI/Button';
 import MessageErr from './UI/MessageErr';
 import TextInput from './UI/TextInput';
+import getModel from './../Models';
 
 const AuthForm = props => {
 
   const [state, setState] = useState({
     fields:{
-      login: getModel('formFields'),
-      subLgn: getModel('formFields'),
-      pass: getModel('formFields')
+      login: getModel('FormFields'),
+      sublogin: getModel('FormFields'),
+      pass: getModel('FormFields')
     },
     isErr: false
   })
 
-  const {login, subLgn, pass} = state.fields;
+  const {login, sublogin, pass} = state.fields;
 
-  const getFieldVal = (obj)=>{
+  const getFieldVal = (obj) => {
     const {type, val, err} = Validate.isValidField(obj);
     let fields = {...state.fields};
+    let isErr = false;
     fields[type] = {val, err};
-    setState({...state, fields, isErr: err});
+    for(let field in fields){
+      if(fields[field].err) isErr = true;
+    }
+    setState({fields, isErr});
   }
 
   const getFormData = () => {
     const validatedState = {...Validate.isValidForm(state)};
-    setState(validatedState);
     if(!validatedState.isErr){
-      props.onSubmitForm(state.fields);
+      props.onSubmitForm(validatedState.fields);
+      setState(validatedState);
+      return;
     }
+    setState({...validatedState, isErr: true});
   }
 
   return(
@@ -47,10 +53,10 @@ const AuthForm = props => {
       <TextInput 
         labelText="Сублогин" 
         inputType="text" 
-        value={subLgn.val} 
-        inValid={subLgn.err}
+        value={sublogin.val} 
+        inValid={sublogin.err}
         optionText="Опционально" 
-        getText={val=>getFieldVal({val,type: 'subLgn'})} 
+        getText={val=>getFieldVal({val,type: 'sublogin'})} 
       />
       <TextInput 
         labelText="Пароль" 

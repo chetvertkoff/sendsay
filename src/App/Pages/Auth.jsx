@@ -1,18 +1,8 @@
 import React  from 'react';
 import AuthForm from '../Components/AuthForm';
 import { useHttp } from '../hooks/useHttp';
-import getModel from '../utils/Factory';
-
-const Logo = () => {
-  return (
-    <div className="logo auth__logo">
-      <div className="logo__figure logo_ellipse"></div>
-      <div className="logo__figure logo_rectangle1"></div>
-      <div className="logo__figure logo_ellipse"></div>
-      <div className="logo__figure logo_rectangle2"></div>
-    </div>
-  )
-}
+import Logo from './../Components/Logo';
+import Sendsay from 'sendsay-api';
 
 // auth true
 /*
@@ -43,11 +33,15 @@ const Logo = () => {
 
 const Auth = ()=>{
   const {request, loading} = useHttp();
-
-  const onSubmitForm = async (formFields)=>{
-    const body = getModel("httpLogin", formFields);
-    const res = await request("https://api.sendsay.ru/", "POST", body);
-    console.log(res);
+// https://api.sendsay.ru/
+  const onSubmitForm = (formFields)=>{
+    let sendsay = new sendsay({
+      auth: {
+        login: 'login', 
+        sublogin: 'optional', 
+        password: 'secret',     
+      }
+    });
   } 
 
   return(

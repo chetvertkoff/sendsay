@@ -9,14 +9,12 @@ const App = ()=>{
   const {isAuthorized} = useAuth();
   
   return(
-      <Switch>
-        {
-          !isAuthorized() ? 
-            <Route path="/login"  component={Auth} />
-          :
-           <Route path="/" exact component={Console} /> 
-        }
-      </Switch>
+    <Switch>
+      {isAuthorized() ? 
+          <Route path="/" exact component={Console} /> 
+        :
+          <Route path="/login"  component={Auth} />}
+    </Switch>
   );
 }
 
