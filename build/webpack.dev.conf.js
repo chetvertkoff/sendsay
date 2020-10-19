@@ -13,7 +13,8 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     overlay: {
       warnings: true,
       errors: true
-    }
+    },
+    proxy: { "/**": { target: 'https://api.sendsay.ru/', secure: false }  },
   },
   plugins: [
     new webpack.SourceMapDevToolPlugin({

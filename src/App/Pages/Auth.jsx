@@ -1,5 +1,7 @@
 import React  from 'react';
 import AuthForm from '../Components/AuthForm';
+import { useHttp } from '../hooks/useHttp';
+import getModel from '../utils/Factory';
 
 const Logo = () => {
   return (
@@ -40,12 +42,22 @@ const Logo = () => {
 */
 
 const Auth = ()=>{
-  
+  const {request, loading} = useHttp();
+
+  const onSubmitForm = async (formFields)=>{
+    const body = getModel("httpLogin", formFields);
+    const res = await request("https://api.sendsay.ru/", "POST", body);
+    console.log(res);
+  } 
+
   return(
     <section className="auth">
       <div className="auth__container">
         <Logo />
-        <AuthForm />
+        <AuthForm 
+          loading={loading}
+          onSubmitForm={onSubmitForm} 
+        />
         <a href="https://github.com/chetvertkoff/sendsay" className="link auth__link">@chetvertkoff</a>
       </div>
     </section>

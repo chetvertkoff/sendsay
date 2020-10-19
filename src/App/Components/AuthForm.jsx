@@ -29,7 +29,7 @@ const AuthForm = props => {
     const validatedState = {...Validate.isValidForm(state)};
     setState(validatedState);
     if(!validatedState.isErr){
-      
+      props.onSubmitForm(state.fields);
     }
   }
 
@@ -61,7 +61,7 @@ const AuthForm = props => {
       />
       <Button 
         disabled={state.isErr}
-        load={false} 
+        loading={props.loading} 
         onClick={getFormData} 
         title="Войти" 
       />
