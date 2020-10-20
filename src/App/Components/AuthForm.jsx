@@ -11,12 +11,12 @@ const AuthForm = props => {
     fields:{
       login: getModel('FormFields'),
       sublogin: getModel('FormFields'),
-      pass: getModel('FormFields')
+      password: getModel('FormFields')
     },
     isErr: false
   })
 
-  const {login, sublogin, pass} = state.fields;
+  const {login, sublogin, password} = state.fields;
 
   const getFieldVal = (obj) => {
     const {type, val, err} = Validate.isValidField(obj);
@@ -61,9 +61,9 @@ const AuthForm = props => {
       <TextInput 
         labelText="Пароль" 
         inputType="password" 
-        value={pass.val} 
-        inValid={pass.err} 
-        getText={val=>getFieldVal({val,type: 'pass'})} 
+        value={password.val} 
+        inValid={password.err} 
+        getText={val=>getFieldVal({val,type: 'password'})} 
       />
       <Button 
         disabled={state.isErr}

@@ -10,12 +10,12 @@ class Validate{
     return !/[a-zA-Z@_0-9]/g.test(this.field.val);
   }
 
-  _pass(){
+  _password(){
     if(!this.field.val) return true;
     return !/^((?![а-яА-Я]).)*$/g.test(this.field.val);
   }
 
-  _subLgn(){
+  _sublogin(){
     if(!this.field.val) return false;
     return this._login();
   }

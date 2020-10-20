@@ -3,6 +3,7 @@ import AuthForm from '../Components/AuthForm';
 import { useHttp } from '../hooks/useHttp';
 import Logo from './../Components/Logo';
 import Sendsay from 'sendsay-api';
+import getModel from './../Models/index';
 
 // auth true
 /*
@@ -35,13 +36,10 @@ const Auth = ()=>{
   const {request, loading} = useHttp();
 // https://api.sendsay.ru/
   const onSubmitForm = (formFields)=>{
-    let sendsay = new sendsay({
-      auth: {
-        login: 'login', 
-        sublogin: 'optional', 
-        password: 'secret',     
-      }
-    });
+    let sendsay = new Sendsay();
+    sendsay.request({ action: 'sys.settings.get' }).then(function(res) {
+      console.log(res);
+    })
   } 
 
   return(
