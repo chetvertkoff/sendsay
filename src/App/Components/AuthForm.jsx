@@ -38,11 +38,10 @@ const AuthForm = props => {
     }
     setState({...validatedState, isErr: true});
   }
-
   return(
     <form className="form auth__form">
       <h3 className="form__title">API-консолька</h3>
-      {/* <MessageErr /> */}
+      {props.errMessage && <MessageErr message={props.errMessage} />} 
       <TextInput 
         labelText="Логин" 
         inputType="text" 

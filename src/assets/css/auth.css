@@ -83,6 +83,7 @@ h3{
 
 .form .form__message .message__right-block .message__text{
   font-size: 0.7em;
+  opacity: 0.5;
 }
 
 .icon{

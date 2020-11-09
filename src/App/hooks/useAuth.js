@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import {useHistory, useLocation} from 'react-router-dom'
+import Cookies from 'js-cookie';
 
 
 const useAuth = () => {
@@ -7,13 +8,14 @@ const useAuth = () => {
   let location = useLocation();
 
   const isAuthorized = () =>{
-    return !!localStorage.getItem('auth');
+    return !!Cookies.get('sendsay_session');
   }
 
   useEffect(()=>{
-    const authStore = localStorage.getItem('auth');
+    const authStore = !!Cookies.get('sendsay_session');
     if(!authStore && location.pathname != '/login'){
       history.push('/login');   
+      return;
     }
   })
    

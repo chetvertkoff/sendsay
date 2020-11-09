@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-const MessageErr = () => {
+const MessageErr = ({message})=> {
   return (
     <div className="message form__message">
       <div className="message__left-block">
@@ -11,7 +11,7 @@ const MessageErr = () => {
       </div>
       <div className="message__right-block">
         <h4 className="h5 message__h5">Вход не вышел</h4>
-        <p className="message__text">id: "error/auth/failed", explain: "wrong_credentials"</p>
+        <p className="message__text">{message}</p>
       </div>
     </div>
   );
