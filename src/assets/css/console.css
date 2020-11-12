@@ -131,11 +131,12 @@
   border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
-.console .console__req-list .console__req-item .console__drop-icon{
+.console .console__drop-icon{
   cursor: pointer;
   height: 18px;
   width: 4px;
   margin-left: 10px;
+  fill: rgba(0, 0, 0, 0.2);
 }
 
 .console .console__clear-button{
@@ -178,4 +179,14 @@
 
 .console .console__editor-wrap #RES .ace_cursor{
   opacity: 0;
+}
+
+.console .console__resize {
+  display: flex;
+}
+
+.console .console__resize .console__drop-icon {
+  margin: auto auto;
+  fill: #999999;
+  cursor: col-resize;
 }

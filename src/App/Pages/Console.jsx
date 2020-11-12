@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import ConsoleHeader from '../Components/ConsoleHeader';
 import ConsoleReqHistory from '../Components/ConsoleReqHistory';
 
@@ -6,6 +6,34 @@ import AceEditor from "react-ace";
 import "ace-builds/src-noconflict/mode-json";
 
 const Console = ()=>{
+
+  const [dragging, setDragging] = useState(false);
+  const el = useRef(null);
+
+  const dragStart = e => {
+    setDragging(true);
+    
+  }
+
+  const onMouseMove = e => {
+    console.log('move');
+  }
+
+  const endDrag = e => {
+    setDragging(false);
+    console.log('end');
+  }
+
+  useEffect(()=>{
+    el.current.addEventListener('mousemove', onMouseMove);
+    el.current.addEventListener('mouseup', endDrag);
+    console.log('render');
+    return ()=>{
+      window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('mouseup', endDrag);
+      console.log('end');
+    }
+  },[dragging])
 
   return(
   <section className="console">
@@ -27,8 +55,8 @@ const Console = ()=>{
           />
         </div>
       </div>
-      <div className="console__resize">
-        <svg className="icon console__drop-icon">
+      <div className="console__resize" >
+        <svg className="icon console__drop-icon" onMouseDown={dragStart} ref={el}>
             <use xlinkHref="/assets/icon/sprite.svg#req-item-drop"></use>
           </svg>
         </div>
