@@ -148,3 +148,18 @@
   box-shadow: -16px 0px 12px -6px #F6F6F6;
   border-left: 1px solid rgba(0, 0, 0, 0.2);
 }
+
+.console .console__body {
+  display: flex;
+  justify-content: space-between;
+}
+
+.console .console__editor-wrap {
+  width: 49.7%;
+}
+
+.console .console__editor {
+  padding: 10px;
+    background: #fff;
+    border-radius: 8px;
+}
