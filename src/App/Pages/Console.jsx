@@ -27,6 +27,11 @@ const Console = ()=>{
           />
         </div>
       </div>
+      <div className="console__resize">
+        <svg className="icon console__drop-icon">
+            <use xlinkHref="/assets/icon/sprite.svg#req-item-drop"></use>
+          </svg>
+        </div>
       <div className="console__editor-wrap">
         <span className="console__editor-title">Ответ:</span>
         <div className="console__editor">

@@ -157,6 +157,7 @@
   display: flex;
   justify-content: space-between;
   background: #fff;
+  position: relative;
 }
 
 .console .console__editor-wrap {
