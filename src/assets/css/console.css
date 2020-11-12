@@ -91,13 +91,17 @@
 
 .console .console__req-list .console__req-item{
   background-color: #fff;
-  margin: 5px 10px 5px;
+  margin: 5px 5px 5px;
   padding: 0 12px 0 24px;
   position: relative;
   line-height: 1.9em;
   border-radius: 5px;
   display: flex;
   align-items: center;
+}
+
+.console .console__req-list .console__req-item:first-child {
+  margin-left: 0;
 }
 
 .console .console__req-list .console__req-item:hover{
@@ -152,14 +156,25 @@
 .console .console__body {
   display: flex;
   justify-content: space-between;
+  background: #fff;
 }
 
 .console .console__editor-wrap {
   width: 49.7%;
 }
 
-.console .console__editor {
+.console .console__editor-wrap .console__editor {
   padding: 10px;
-    background: #fff;
-    border-radius: 8px;
+  background: #fff;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.console .console__editor-wrap .console__editor-title {
+  color: #999999;
+  font-size: 0.8em;
+}
+
+.console .console__editor-wrap #RES .ace_cursor{
+  opacity: 0;
 }

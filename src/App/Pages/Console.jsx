@@ -37,7 +37,9 @@ const Console = ()=>{
             setOptions={{
               showGutter: false,
               highlightActiveLine: false,
-              printMargin: false
+              printMargin: false,
+              readOnly: true,
+              showPrintMargin: false
             }}
           />
         </div>
