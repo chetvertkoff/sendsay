@@ -8,8 +8,8 @@ const Console = ()=>{
 
   return(
   <section className="console">
-    {/* <ConsoleHeader />
-    <ConsoleReqHistory /> */}
+    <ConsoleHeader />
+    <ConsoleReqHistory />
     <ConsoleBody />
     <div className="console__footer console_block">
 
