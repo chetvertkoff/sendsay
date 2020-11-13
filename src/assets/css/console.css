@@ -155,14 +155,8 @@
 }
 
 .console .console__body {
-  display: flex;
-  justify-content: space-between;
+  width: 100%;
   background: #fff;
-  position: relative;
-}
-
-.console .console__editor-wrap {
-  width: 49.7%;
 }
 
 .console .console__editor-wrap .console__editor {
@@ -182,11 +176,21 @@
 }
 
 .console .console__resize {
-  display: flex;
+  margin: auto;
+  width: 4px;
 }
 
 .console .console__resize .console__drop-icon {
   margin: auto auto;
   fill: #999999;
   cursor: col-resize;
+}
+
+.console .noselect{
+-webkit-touch-callout: none; 
+  -webkit-user-select: none; 
+   -khtml-user-select: none; 
+     -moz-user-select: none;
+      -ms-user-select: none; 
+          user-select: none;
 }
