@@ -10,12 +10,6 @@ const ConsoleReqHistoryItem = ({i}) => {
       <svg className="icon console__drop-icon">
         <use xlinkHref="/assets/icon/sprite.svg#req-item-drop"></use>
       </svg>
-      {showDrop &&       
-      <ul className="req-item__drop-card">
-        <li>Выполнить</li>
-        <li>Скопировать</li>
-        <li>Удалить</li>
-      </ul>}
     </li>
   );
 }
