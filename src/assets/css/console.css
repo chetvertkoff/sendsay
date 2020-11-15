@@ -68,13 +68,14 @@
 
 .console .console__req-history{
   position: relative;
+  padding-right: 56px;
 }
 
 .console .console__req-list{
   display: flex;
   list-style: none;
   padding: 0;
-  /* overflow-x: scroll; */
+  overflow-x: scroll;
   margin: 0;
 }
 
