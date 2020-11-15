@@ -23,7 +23,6 @@ const ConsoleReqHistory = () => {
       if(pos < 1) optionsUI.scrollPos -= 100;
       if(optionsUI.scrollPos <= 0) optionsUI.scrollPos = 0;
     }
-
     item.scrollLeft = optionsUI.scrollPos;
     localStorage.setItem('optionsUI', JSON.stringify({...optionsUI, scrollPos: optionsUI.scrollPos}));
   }
@@ -69,11 +68,7 @@ const ConsoleReqHistory = () => {
           <use xlinkHref="/assets/icon/sprite.svg#times"></use>
         </svg>
       </div>
-        <ul className="req-item__drop-card">
-          <li>Выполнить</li>
-          <li>Скопировать</li>
-          <li>Удалить</li>
-        </ul>
+      <ReqDropCard />
     </div>
   );
 }

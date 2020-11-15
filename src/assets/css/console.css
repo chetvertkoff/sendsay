@@ -70,6 +70,7 @@
 .console .console__req-history{
   position: relative;
   padding-right: 56px;
+  height: 40px;
 }
 
 .console .console__req-list{
@@ -78,8 +79,6 @@
   padding: 0;
   overflow-x: scroll;
   margin: 0;
-  position: absolute;
-
 }
 
 .console .console__req-list::-webkit-scrollbar {
@@ -199,7 +198,7 @@
           user-select: none;
 }
 
-.req-item__drop-card {
+.console__req-drop-card {
   position: absolute;
   list-style: none;
   padding: 0;
