@@ -1,5 +1,6 @@
 .console{
   min-height: 100vh;
+  overflow: hidden;
 }
 
 .console .console__header {
@@ -68,14 +69,16 @@
 
 .console .console__req-history{
   position: relative;
+  height: 40px;
 }
 
 .console .console__req-list{
   display: flex;
   list-style: none;
   padding: 0;
-  /* overflow-x: scroll; */
   margin: 0;
+  position: absolute;
+
 }
 
 .console .console__req-list::-webkit-scrollbar {
