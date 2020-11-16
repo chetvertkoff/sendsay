@@ -69,6 +69,7 @@ const AuthForm = props => {
         loading={props.loading} 
         onClick={getFormData} 
         title="Войти" 
+        classes={['form__button']}
       />
     </form>
   )

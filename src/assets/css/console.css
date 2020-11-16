@@ -95,7 +95,7 @@
 .console .console__req-list .console__req-item{
   background-color: #fff;
   margin: 5px 5px 5px;
-  padding: 0 12px 0 24px;
+  padding: 0 0px 0 24px;
   position: relative;
   line-height: 1.9em;
   border-radius: 5px;
@@ -138,7 +138,7 @@
   cursor: pointer;
   height: 18px;
   width: 4px;
-  margin-left: 10px;
+  padding: 0 12px 0 12px;
   fill: rgba(0, 0, 0, 0.2);
 }
 
@@ -187,6 +187,7 @@
   margin: auto auto;
   fill: #999999;
   cursor: col-resize;
+  padding: 0;
 }
 
 .console .noselect{
@@ -209,4 +210,5 @@
   z-index: 9;
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
   border-radius: 3px;
+  max-width: 129px
 }

@@ -8,11 +8,16 @@ const Console = ()=>{
 
   return(
   <section className="console">
-    <ConsoleHeader />
+    {/* <ConsoleHeader /> */}
     <ConsoleReqHistory />
     <ConsoleBody />
     <div className="console__footer console_block">
-
+      <Button
+        // disabled={state.isErr}
+        // loading={props.loading} 
+        // onClick={getFormData} 
+        title="Войти" 
+      />
     </div>
   </section>
   )

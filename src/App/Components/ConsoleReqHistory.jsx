@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { connect } from 'react-redux';
 import ConsoleReqHistoryItem from './ConsoleReqHistoryItem';
 import ReqDropCard from './UI/ReqDropCard';
 
-const ConsoleReqHistory = () => {
+const ConsoleReqHistory = ({showDrop}) => {
 
   const [style, setStyle] = useState({visibility: "hidden"});
   const el = useRef(null);
@@ -43,7 +44,9 @@ const ConsoleReqHistory = () => {
   useEffect(()=>{
     scroll();
     setStyle({visibility: "inherit"});
-  },[])
+  },[]);
+
+
 
   return (
     <div className="console__req-history console_block">
@@ -68,9 +71,13 @@ const ConsoleReqHistory = () => {
           <use xlinkHref="/assets/icon/sprite.svg#times"></use>
         </svg>
       </div>
-      <ReqDropCard />
+      {showDrop && <ReqDropCard />}
     </div>
   );
 }
 
-export default ConsoleReqHistory;
+const mapStateToProps = state => ({
+  showDrop: state.consoleReqHistory.showDrop
+})
+
+export default connect(mapStateToProps, null)(ConsoleReqHistory);

@@ -8,6 +8,11 @@ const Button = props => {
     props.onClick && props.onClick()
   }
 
+  const className = ['button', ...props.classes];
+
+  if(props.disabled) className.push('button_disabled');
+  else className = classN
+
   return (
     <button onClick={clickEvent} className={`button form__button ${props.disabled && "button_disabled"}`}>
       {
