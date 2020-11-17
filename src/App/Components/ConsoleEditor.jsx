@@ -12,6 +12,7 @@ const ConsoleEditor = props => {
           mode="json"
           name={props.name}
           width="100%"
+          height="100%"
           setOptions={props.options}
         />
       </div>

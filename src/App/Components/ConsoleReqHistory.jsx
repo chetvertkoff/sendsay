@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { connect } from 'react-redux';
 import ConsoleReqHistoryItem from './ConsoleReqHistoryItem';
-import ReqDropCard from './UI/ReqDropCard';
 
 const ConsoleReqHistory = ({showDrop}) => {
 
@@ -71,7 +70,6 @@ const ConsoleReqHistory = ({showDrop}) => {
           <use xlinkHref="/assets/icon/sprite.svg#times"></use>
         </svg>
       </div>
-      {showDrop && <ReqDropCard />}
     </div>
   );
 }

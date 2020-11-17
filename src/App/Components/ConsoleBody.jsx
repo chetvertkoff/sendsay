@@ -4,6 +4,8 @@ import Table from '../hoc/Table';
 import ConsoleEditor from './ConsoleEditor';
 
 const ConsoleBody = () => {
+  
+
   return (
     <Table>
       <ConsoleEditor

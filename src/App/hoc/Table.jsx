@@ -2,13 +2,15 @@ import React from 'react';
 
 const Table = props =>{
   return (
-    <table className="console__body console_block">
-      <tbody>
-        <tr>
-          {props.children}
-        </tr>
-      </tbody>
-    </table>
+    <div className="console__body body console_block">
+      <table className="body__table">
+        <tbody>
+          <tr>
+            {props.children}
+          </tr>
+        </tbody>
+      </table>
+    </div>
   )
 }
 
