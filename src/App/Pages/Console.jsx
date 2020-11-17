@@ -6,14 +6,13 @@ import ConsoleFooter from '../Components/ConsoleFooter';
 
 const Console = ()=>{
 
-
   return(
-  <section className="console">
-    {/* <ConsoleHeader /> */}
-    <ConsoleReqHistory />
-    <ConsoleBody />
-    <ConsoleFooter />
-  </section>
+    <section className="console">
+      <ConsoleHeader />
+      <ConsoleReqHistory />
+      <ConsoleBody />
+      <ConsoleFooter />
+    </section>
   )
 }
 

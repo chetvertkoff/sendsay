@@ -4,6 +4,7 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  min-width: 640px;
 }
 
 .console .console__header {
@@ -171,7 +172,6 @@
 .console .console__body .body__table {
   height: 100%;
   width: 100%;
-  min-width: 585px;
 }
 
 .console .console__editor-wrap {

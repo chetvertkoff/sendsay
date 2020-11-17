@@ -11,9 +11,11 @@ const ConsoleEditor = props => {
         <AceEditor
           mode="json"
           name={props.name}
+          value={props.value}
           width="100%"
           height="100%"
           setOptions={props.options}
+          onChange={props.getDataEditor}
         />
       </div>
     </td>

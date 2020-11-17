@@ -16,7 +16,7 @@ const Auth = ()=>{
   // Пароль: sa9Niqueng
 
   const reqLogin = async fields => {
-    const session = await request('login', fields);
+    const session = await request(fields);
     if(!session.session) return session;
     Cookies.set('sendsay_session', session.session, { expires: 7 });
     return session;

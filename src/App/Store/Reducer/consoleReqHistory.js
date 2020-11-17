@@ -1,5 +1,3 @@
-
-import React from 'react';
 import { HISTORY_MODEL, SHOW_DROP } from '../types';
 
 

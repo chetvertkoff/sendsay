@@ -1,13 +1,16 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { sendReqData } from '../Store/Action/consoleRequest';
 import Button from './UI/Button';
 
-const ConsoleFooter = () => {
+const ConsoleFooter = props => {
+
   return (
     <div className="console__footer footer console_block">
       <Button 
         // disabled={state.isErr}
         // loading={props.loading} 
-        // onClick={getFormData} 
+        onClick={()=>props.sendReqData(props.reqData)} 
         title="Отправить" 
         classes={['footer__button']}
       />
@@ -22,4 +25,12 @@ const ConsoleFooter = () => {
   );
 }
 
-export default ConsoleFooter;
+const mapStatetoProps = state => ({
+  reqData: state.consoleRequest.reqData
+})
+
+const mapDispatchToProps = dispatch =>({
+  sendReqData: val=>dispatch(sendReqData(val))
+})
+
+export default connect(mapStatetoProps, mapDispatchToProps)(ConsoleFooter);
