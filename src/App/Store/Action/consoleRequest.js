@@ -1,20 +1,34 @@
-import { REQ_DATA, REQ_LOADING, RES_DATA } from "../types";
+import { REQ_DATA, REQ_LOADING, RES_DATA, RES_ERR, REQ_HISTORY } from "../types";
 import Sendsay from 'sendsay-api';
-import Cookies from 'js-cookie';
+import { writeResHistory } from "../../utils/writeResHistory";
 
 const sendsay = new Sendsay();
-const session = Cookies.get('sendsay_session') || null;
+
 export const getReqData = val => dispatch => dispatch({type: REQ_DATA, payload: val});
+
+// {
+//   "action":"issue.send"
+// }
 
 // {
 //   "action":"sys.settings.get"
 // }
 
 export const sendReqData = val => async dispatch => {
-  // const res = await sendsay.request({...val, session});
+  const parseReq = JSON.parse(val);
+  let isErr = false;
+  let res;
   dispatch({type: REQ_LOADING, payload: true});
-  setTimeout(() => {
-    // writeResHistory(val)
-    dispatch({type: RES_DATA, payload: val})
-  }, 500);
+  try {
+    sendsay.setSessionFromCookie();
+    res = await sendsay.request({...parseReq}); 
+    dispatch({type: RES_ERR, payload: false});
+  } catch (error) {
+    res = error;
+    isErr = true;
+  }
+  
+  dispatch({type: RES_DATA, payload: res});
+  dispatch({type: RES_ERR, payload: isErr});
+  dispatch({type: REQ_HISTORY, payload: writeResHistory(parseReq, isErr)});
 };

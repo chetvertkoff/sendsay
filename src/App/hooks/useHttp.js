@@ -8,11 +8,10 @@ export const useHttp = () =>{
     const sendsay = new Sendsay();
     setLoading(true);
     try {
-      const action = req.action || 'sys.settings.get';
+      const action = req.action;
       const response = await sendsay.request({...req, action});
-      const data = await response;
       setLoading(false);
-      return data;
+      return response;
     } catch (e) {
       setLoading(false);
       return e;

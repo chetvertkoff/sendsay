@@ -1,22 +1,14 @@
-import { HISTORY_MODEL, SHOW_DROP } from '../types';
+import { REQ_HISTORY } from '../types';
 
-
+const initialHistory = JSON.parse(localStorage.getItem('reqItems')) || [];
 const initialState = {
-  showDrop:false,
-  historyModel: [{
-    id: Date.now(),
-    err: false,
-    name: "track.get",
-    res: {}
-  }]
+  reqHistory: initialHistory
 }
 
 const consoleReqHistory = (state = initialState, action) => {
   switch(action.type){
-    case SHOW_DROP:
-      return {...state, showDrop: !state.showDrop};
-    case HISTORY_MODEL:
-      return {...state, historyModel};
+    case REQ_HISTORY:
+      return {...state, reqHistory: action.payload};
     default:
       return state;
   }

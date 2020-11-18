@@ -4,6 +4,7 @@ import Loader from '../Loader'
 
 const Button = props => {
   const clickEvent = (e)=>{
+    if(props.loading) return;
     e.preventDefault(); 
     props.onClick && props.onClick()
   }

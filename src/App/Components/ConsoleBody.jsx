@@ -7,7 +7,9 @@ import ConsoleEditor from './ConsoleEditor';
 
 const ConsoleBody = props => {
   const resData = () => {
-    if(Object.keys(props.resData)?.length) return props.resData;
+    if(Object.keys(props.resData)?.length){
+      return JSON.stringify(props.resData, null, 2);
+    }
     return "";
   }
 
@@ -22,7 +24,6 @@ const ConsoleBody = props => {
         name="REQ"
         getDataEditor={props.getReqData}
         err={props.reqErr}
-        value={props.reqData}
         options={{
           showGutter: false,
           highlightActiveLine: false,
@@ -34,6 +35,7 @@ const ConsoleBody = props => {
         title="Ответ:"
         name="RES"
         value={resData()}
+        err={props.resErr}
         options={{
           showGutter: false,
           highlightActiveLine: false,
@@ -49,7 +51,8 @@ const ConsoleBody = props => {
 const mapStateToProps = state => ({
   resData: state.consoleRequest.resData,
   reqData: state.consoleRequest.reqData,
-  reqErr: state.consoleRequest.reqErr
+  reqErr: state.consoleRequest.reqErr,
+  resErr: state.consoleRequest.resErr
 })
 
 const mapDispatchToProps = dispatch =>({

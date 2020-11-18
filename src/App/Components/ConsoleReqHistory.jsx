@@ -2,9 +2,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import { connect } from 'react-redux';
 import ConsoleReqHistoryItem from './ConsoleReqHistoryItem';
 
-const ConsoleReqHistory = ({showDrop}) => {
-
+const ConsoleReqHistory = (props) => {
   const [style, setStyle] = useState({visibility: "hidden"});
+  const [showDrops, setDrops] = useState(false);
   const el = useRef(null);
 
   const scroll = (e = {}) => { 
@@ -25,11 +25,12 @@ const ConsoleReqHistory = ({showDrop}) => {
     }
     item.scrollLeft = optionsUI.scrollPos;
     localStorage.setItem('optionsUI', JSON.stringify({...optionsUI, scrollPos: optionsUI.scrollPos}));
+    setDrops(false);
   }
 
   const disableDocScroll = e =>{
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop; 
-    const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft
+    const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
 
     window.onscroll = ()=>{ 
       window.scrollTo(scrollLeft, scrollTop); 
@@ -46,7 +47,6 @@ const ConsoleReqHistory = ({showDrop}) => {
   },[]);
 
 
-
   return (
     <div className="console__req-history console_block">
       <ul 
@@ -57,13 +57,11 @@ const ConsoleReqHistory = ({showDrop}) => {
         style={style}
         ref={el}
       >
-      {
-        [1,2,3,4,5,6,7,8,9,10,2,3,4,5,6,7,8,9,10,2,3,4,5,6,7,8,9,10,2,3,4,5,6,7,8,9,10].map((el,i)=>{
-          return (
-            <ConsoleReqHistoryItem key={i} i={i} />
-          )
-        })
-      }
+        {
+          [...props.reqHistory].reverse().map((el, i) =>{
+            return <ConsoleReqHistoryItem key={i} item={el} setDrop={showDrops} />
+          })
+        }
       </ul>
       <div className="console__clear-button">
         <svg className="icon">
@@ -75,7 +73,8 @@ const ConsoleReqHistory = ({showDrop}) => {
 }
 
 const mapStateToProps = state => ({
-  showDrop: state.consoleReqHistory.showDrop
+  showDrop: state.consoleReqHistory.showDrop,
+  reqHistory: state.consoleReqHistory.reqHistory
 })
 
 export default connect(mapStateToProps, null)(ConsoleReqHistory);

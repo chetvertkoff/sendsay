@@ -1,4 +1,4 @@
-import { REQ_DATA, REQ_ERR, REQ_LOADING, RES_DATA } from "../types";
+import { REQ_DATA, REQ_ERR, REQ_LOADING, RES_DATA, RES_ERR } from "../types";
 
 const initialState = {
   reqData: {},
@@ -16,6 +16,8 @@ const consoleRequest = (state = initialState, action) => {
       return {...state, resData: action.payload, loading: false};
     case REQ_ERR:
       return {...state, reqErr: action.payload};
+    case RES_ERR:
+      return {...state, resErr: action.payload};
     case REQ_LOADING:
       return {...state, loading: action.payload}
     default:

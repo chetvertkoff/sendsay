@@ -9,13 +9,14 @@ const ConsoleFooter = props => {
   const submitReq = () => {
     const isValidRequest = Validate.isValidRequest(props.reqData);
     if(!isValidRequest){
-      props.setReqErr();
+      props.setReqErr({type:'REQ_ERR', payload: true});
       return;
     }
+    if(props.reqErr) props.setReqErr({type:'REQ_ERR', payload: false});
+    
     props.sendReqData(props.reqData);
   }
 
-  
 
   return (
     <div className="console__footer footer console_block">
@@ -45,7 +46,7 @@ const mapStatetoProps = state => ({
 const mapDispatchToProps = dispatch =>({
   sendReqData: val=>dispatch(sendReqData(val)),
   getReqData: val=>dispatch(getReqData(val)),
-  setReqErr: () => dispatch({type:'REQ_ERR', payload: true})
+  setReqErr: val => dispatch(val)
 })
 
 export default connect(mapStatetoProps, mapDispatchToProps)(ConsoleFooter);
