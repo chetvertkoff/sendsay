@@ -38,6 +38,16 @@ class Validate{
 
     return {fields: this.fields, isErr};
   }
+
+  isValidRequest(val){
+    try {
+      const obj = JSON.parse(val);
+      if (!obj.action) return false;
+      return true;
+    } catch (error) {
+      return false; 
+    }
+  }
 }
 
 export default new Validate();

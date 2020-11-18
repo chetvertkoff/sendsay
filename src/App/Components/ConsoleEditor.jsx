@@ -5,7 +5,7 @@ import "ace-builds/src-noconflict/mode-json";
 
 const ConsoleEditor = props => {
   return (
-    <td className="console__editor-wrap">
+    <td className={`console__editor-wrap ${props.err && "console__editor-wrap_err"}`}>
       <span className="console__editor-title">{props.title}</span>
       <div className="console__editor">
         <AceEditor

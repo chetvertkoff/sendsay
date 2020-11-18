@@ -6,7 +6,14 @@ import { getReqData } from '../Store/Action/consoleRequest';
 import ConsoleEditor from './ConsoleEditor';
 
 const ConsoleBody = props => {
-  const resData = JSON.stringify(props.resData);
+  const resData = () => {
+    if(Object.keys(props.resData)?.length) return props.resData;
+    return "";
+  }
+
+  const reqData = () => {
+    
+  }
 
   return (
     <Table>
@@ -14,6 +21,8 @@ const ConsoleBody = props => {
         title="Запрос:"
         name="REQ"
         getDataEditor={props.getReqData}
+        err={props.reqErr}
+        value={props.reqData}
         options={{
           showGutter: false,
           highlightActiveLine: false,
@@ -24,7 +33,7 @@ const ConsoleBody = props => {
       <ConsoleEditor 
         title="Ответ:"
         name="RES"
-        value={resData || ''}
+        value={resData()}
         options={{
           showGutter: false,
           highlightActiveLine: false,
@@ -38,11 +47,13 @@ const ConsoleBody = props => {
 }
 
 const mapStateToProps = state => ({
-  resData: state.consoleRequest.resData
+  resData: state.consoleRequest.resData,
+  reqData: state.consoleRequest.reqData,
+  reqErr: state.consoleRequest.reqErr
 })
 
 const mapDispatchToProps = dispatch =>({
-  getReqData: val=>dispatch(getReqData(val))
+  getReqData: val=>dispatch(getReqData(val)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ConsoleBody);

@@ -1,4 +1,4 @@
-import { REQ_DATA, RES_DATA } from "../types";
+import { REQ_DATA, REQ_LOADING, RES_DATA } from "../types";
 import Sendsay from 'sendsay-api';
 import Cookies from 'js-cookie';
 
@@ -11,8 +11,10 @@ export const getReqData = val => dispatch => dispatch({type: REQ_DATA, payload: 
 // }
 
 export const sendReqData = val => async dispatch => {
-  val = JSON.parse(val)
-  const res = await sendsay.request({...val, session});
-  console.log(res);
-  dispatch({type: RES_DATA, payload: res})
+  // const res = await sendsay.request({...val, session});
+  dispatch({type: REQ_LOADING, payload: true});
+  setTimeout(() => {
+    // writeResHistory(val)
+    dispatch({type: RES_DATA, payload: val})
+  }, 500);
 };
