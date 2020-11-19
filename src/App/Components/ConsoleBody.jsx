@@ -14,7 +14,8 @@ const ConsoleBody = props => {
   }
 
   const reqData = () => {
-    
+    if(!Object.keys(props.reqData)?.length) return "";
+    return props.reqData;
   }
 
   return (
@@ -24,6 +25,7 @@ const ConsoleBody = props => {
         name="REQ"
         getDataEditor={props.getReqData}
         err={props.reqErr}
+        value={reqData()}
         options={{
           showGutter: false,
           highlightActiveLine: false,

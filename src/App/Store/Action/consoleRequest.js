@@ -24,10 +24,10 @@ export const sendReqData = val => async dispatch => {
     res = await sendsay.request({...parseReq}); 
     dispatch({type: RES_ERR, payload: false});
   } catch (error) {
+    if(error.id?.split('/')[1] === "auth") return "logout";
     res = error;
     isErr = true;
   }
-  
   dispatch({type: RES_DATA, payload: res});
   dispatch({type: RES_ERR, payload: isErr});
   dispatch({type: REQ_HISTORY, payload: writeResHistory(parseReq, isErr)});

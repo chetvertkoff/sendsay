@@ -1,10 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { sendReqData } from '../Store/Action/consoleRequest';
+import { sendReqData, getReqData } from '../Store/Action/consoleRequest';
 import Button from './UI/Button';
 import Validate from '../utils/validate';
+import useAuth from '../hooks/useAuth';
 
 const ConsoleFooter = props => {
+  const {logOut} = useAuth();
+
+  const sendReqData = async () =>{
+    const res = await props.sendReqData(props.reqData);
+    if(res == "logout") logOut();
+  }
 
   const submitReq = () => {
     const isValidRequest = Validate.isValidRequest(props.reqData);
@@ -14,9 +21,18 @@ const ConsoleFooter = props => {
     }
     if(props.reqErr) props.setReqErr({type:'REQ_ERR', payload: false});
     
-    props.sendReqData(props.reqData);
+    sendReqData();
   }
 
+  const beautifyJson = () => {
+    try {
+      const parseData = JSON.parse(props.reqData);
+      const formattedText = JSON.stringify(parseData, null, 2);
+      props.getReqData(formattedText);
+    } catch (error) {
+      
+    }
+  }
 
   return (
     <div className="console__footer footer console_block">
@@ -27,7 +43,7 @@ const ConsoleFooter = props => {
         classes={['footer__button']}
       />
       <a href="https://github.com/chetvertkoff/sendsay" className="link footer__link">@chetvertkoff</a>
-      <button className="footer__format-button" tabIndex="0">
+      <button className="footer__format-button" onClick={beautifyJson}>
         <svg className="icon footer__format-icon">
           <use xlinkHref="/assets/icon/sprite.svg#format"></use>
         </svg>
