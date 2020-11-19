@@ -36,9 +36,14 @@
 .console .console__header .console__logout-button{
   display: flex;
   margin-left: 20px;
-  min-width: 80px;
+  min-width: 90px;
   justify-content: space-between;
   cursor: pointer;
+  align-items: center;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 1em;
 }
 
 .console .console__header .console__fullscreen-button{

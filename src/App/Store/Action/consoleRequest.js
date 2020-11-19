@@ -18,6 +18,7 @@ export const sendReqData = val => async dispatch => {
   const parseReq = JSON.parse(val);
   let isErr = false;
   let res;
+
   dispatch({type: REQ_LOADING, payload: true});
   try {
     sendsay.setSessionFromCookie();
@@ -28,6 +29,7 @@ export const sendReqData = val => async dispatch => {
     res = error;
     isErr = true;
   }
+  if(res.sublogin) delete res.sublogin;
   dispatch({type: RES_DATA, payload: res});
   dispatch({type: RES_ERR, payload: isErr});
   dispatch({type: REQ_HISTORY, payload: writeResHistory(parseReq, isErr)});

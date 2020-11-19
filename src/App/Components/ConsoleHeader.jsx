@@ -1,6 +1,9 @@
 import React from 'react';
+import useAuth from '../hooks/useAuth';
+
 
 const ConsoleHeader = () => {
+  const {logOut} = useAuth();
   return (
     <div className="console__header console_block">
       <div className="logo console__logo">
@@ -14,13 +17,13 @@ const ConsoleHeader = () => {
         <span>some@email.com</span>
         <span>sublogin</span>
       </div>
-      <div className="console__logout-button">
+      <button className="console__logout-button" onClick={logOut}>
         Выйти 
         <svg className="icon">
           <use xlinkHref="/assets/icon/sprite.svg#log-out"></use>
         </svg>
-      </div>
-      <div className="console__fullscreen-button" tabIndex="0">
+      </button>
+      <div className="console__fullscreen-button">
         <svg className="icon">
           <use xlinkHref="/assets/icon/sprite.svg#fullscreen-off"></use>
         </svg>

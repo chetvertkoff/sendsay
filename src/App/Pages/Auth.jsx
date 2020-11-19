@@ -17,6 +17,7 @@ const Auth = ()=>{
 
   const reqLogin = async fields => {
     const session = await request(fields);
+    console.log(session);
     if(!session.session) return session;
     Cookies.set('sendsay_session', session.session, { expires: 7 });
     return session;
