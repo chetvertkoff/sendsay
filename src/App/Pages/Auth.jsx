@@ -11,16 +11,19 @@ const Auth = ()=>{
   const [errMessage, setErrMessage] = useState('');
   const history = useHistory();
 
-
   // Логин: chetvertkoffkirill@gmail.com
   // Пароль: sa9Niqueng
 
   const reqLogin = async fields => {
-    const session = await request(fields);
-    console.log(session);
-    if(!session.session) return session;
-    Cookies.set('sendsay_session', session.session, { expires: 7 });
-    return session;
+    const {login, sublogin} = fields;
+    const userInfo = JSON.stringify({login, sublogin});
+    const res = await request(fields);
+
+    if(!res.session) return res;
+    Cookies.set('sendsay_session', res.session, { expires: 7 });
+    localStorage.setItem('user_info', userInfo);
+    
+    return res;
   }
 
   const onSubmitForm = (formFields)=>{
@@ -41,7 +44,7 @@ const Auth = ()=>{
   return(
     <section className="auth">
       <div className="auth__container">
-        <Logo />
+        <Logo parentClass="auth__logo"/>
         <AuthForm 
           loading={loading}
           onSubmitForm={onSubmitForm} 

@@ -3,9 +3,7 @@ import {useHistory, useLocation} from 'react-router-dom'
 import Cookies from 'js-cookie';
 import Sendsay from 'sendsay-api';
 
-
 const sendsay = new Sendsay();
-
 
 const useAuth = () => {
   let history = useHistory();
@@ -18,6 +16,7 @@ const useAuth = () => {
   const logOut = async () => {
     await sendsay.request({action: "logout"});
     Cookies.remove('sendsay_session'); 
+    localStorage.removeItem('user_info');
     history.push('/login');
   }
 

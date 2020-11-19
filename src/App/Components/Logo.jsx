@@ -1,8 +1,8 @@
 import React  from 'react';
 
-const Logo = () => {
+const Logo = ({parentClass}) => {
   return (
-    <div className="logo auth__logo">
+    <div className={`logo ${parentClass}`}>
       <div className="logo__figure logo_ellipse"></div>
       <div className="logo__figure logo_rectangle1"></div>
       <div className="logo__figure logo_ellipse"></div>
