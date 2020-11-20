@@ -1,13 +1,12 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { connect } from 'react-redux';
 import ConsoleReqHistoryItem from './ConsoleReqHistoryItem';
 
 const ConsoleReqHistory = (props) => {
-  const [style, setStyle] = useState({visibility: "hidden"});
   const [showDrops, setDrops] = useState(false);
   const el = useRef(null);
 
-  const scroll = (e = {}) => { 
+  const scroll = useCallback((e = {}) => { 
     let item = e.currentTarget || null;
     const optionsUI = JSON.parse(localStorage.getItem('optionsUI')) || {};
     if(!optionsUI.scrollPos) optionsUI.scrollPos = 0;
@@ -26,7 +25,7 @@ const ConsoleReqHistory = (props) => {
     item.scrollLeft = optionsUI.scrollPos;
     localStorage.setItem('optionsUI', JSON.stringify({...optionsUI, scrollPos: optionsUI.scrollPos}));
     setDrops(false);
-  }
+  },[]);
 
   const disableDocScroll = e =>{
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop; 
@@ -43,9 +42,7 @@ const ConsoleReqHistory = (props) => {
 
   useEffect(()=>{
     scroll();
-    setStyle({visibility: "inherit"});
   },[]);
-
 
   return (
     <div className="console__req-history console_block">
@@ -54,7 +51,6 @@ const ConsoleReqHistory = (props) => {
         onMouseEnter={disableDocScroll} 
         onMouseLeave={enableDocScroll} 
         onWheel={scroll}
-        style={style}
         ref={el}
       >
         {

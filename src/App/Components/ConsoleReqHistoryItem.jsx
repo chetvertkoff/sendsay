@@ -13,13 +13,12 @@ const ConsoleReqHistoryItem = props => {
         setDrop(false);
       }
     }
-
     document.addEventListener("click", handleClickOutside);
-
     return () => {
-        document.removeEventListener("click", handleClickOutside);
+      document.removeEventListener("click", handleClickOutside);
     };
   }, [el, props.setDrop]);
+
 
   return (
     <li 

@@ -5,10 +5,11 @@ import ConsoleBody from '../Components/ConsoleBody';
 import ConsoleFooter from '../Components/ConsoleFooter';
 
 const Console = ()=>{
+  const el = useRef(null);
 
   return(
-    <section className="console">
-      <ConsoleHeader />
+    <section className="console" ref={el}>
+      <ConsoleHeader el={el} />
       <ConsoleReqHistory />
       <ConsoleBody />
       <ConsoleFooter />
