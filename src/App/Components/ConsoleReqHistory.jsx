@@ -3,10 +3,31 @@ import { connect } from 'react-redux';
 import ConsoleReqHistoryItem from './ConsoleReqHistoryItem';
 
 const ConsoleReqHistory = (props) => {
-  const [showDrops, setDrops] = useState(false);
+  const [currentId, setID] = useState(null);
   const el = useRef(null);
+  const droppedClasses = ['console__req-list'];
+
+  if(currentId != null) droppedClasses.push('console__req-list_dropped');
+  else droppedClasses.filter(el=>el!=='console__req-list_dropped');
+
+  useEffect(()=>{
+    scroll();
+
+    const handleClickOutside = e => {
+      if (!el.current.contains(e.target)) {
+        setID(null);
+      }
+    }
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  },[]);
 
   const scroll = useCallback((e = {}) => { 
+    if(currentId != null) return;
+
     let item = e.currentTarget || null;
     const optionsUI = JSON.parse(localStorage.getItem('optionsUI')) || {};
     if(!optionsUI.scrollPos) optionsUI.scrollPos = 0;
@@ -24,10 +45,9 @@ const ConsoleReqHistory = (props) => {
     }
     item.scrollLeft = optionsUI.scrollPos;
     localStorage.setItem('optionsUI', JSON.stringify({...optionsUI, scrollPos: optionsUI.scrollPos}));
-    setDrops(false);
-  },[]);
+  },[currentId]);
 
-  const disableDocScroll = e =>{
+  const disableDocScroll = e => {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop; 
     const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
 
@@ -40,22 +60,37 @@ const ConsoleReqHistory = (props) => {
     window.onscroll=()=>{}
   }
 
-  useEffect(()=>{
-    scroll();
-  },[]);
+  const setDrop = useCallback(e=>{
+    const id = e.target.id;
+    if(!id || id == currentId) {
+      setID(null);
+      return;
+    }
+    setID(id);
+  },[currentId])
+
+  console.log(props.reqHistory);
 
   return (
-    <div className="console__req-history console_block">
+    <div 
+      className="console__req-history console_block"
+      onMouseEnter={disableDocScroll} 
+      onMouseLeave={enableDocScroll} 
+    >
       <ul 
-        className="console__req-list" 
-        onMouseEnter={disableDocScroll} 
-        onMouseLeave={enableDocScroll} 
+        className={droppedClasses.join(' ')}
         onWheel={scroll}
+        onClick={setDrop}
         ref={el}
       >
         {
           [...props.reqHistory].reverse().map((el, i) =>{
-            return <ConsoleReqHistoryItem key={i} item={el} setDrop={showDrops} />
+            return <ConsoleReqHistoryItem 
+              key={i} 
+              i={i} 
+              item={el} 
+              showDrop={i == currentId} 
+            />
           })
         }
       </ul>
@@ -69,7 +104,6 @@ const ConsoleReqHistory = (props) => {
 }
 
 const mapStateToProps = state => ({
-  showDrop: state.consoleReqHistory.showDrop,
   reqHistory: state.consoleReqHistory.reqHistory
 })
 

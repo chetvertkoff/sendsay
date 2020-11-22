@@ -29,9 +29,7 @@ const ConsoleFooter = props => {
       const parseData = JSON.parse(props.reqData);
       const formattedText = JSON.stringify(parseData, null, 2);
       props.getReqData(formattedText);
-    } catch (error) {
-      
-    }
+    } catch (error) {}
   }
 
   return (

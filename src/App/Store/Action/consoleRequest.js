@@ -1,6 +1,6 @@
 import { REQ_DATA, REQ_LOADING, RES_DATA, RES_ERR, REQ_HISTORY } from "../types";
 import Sendsay from 'sendsay-api';
-import { writeResHistory } from "../../utils/writeResHistory";
+import ResHistory from "../../utils/ResHistory";
 
 const sendsay = new Sendsay();
 
@@ -25,12 +25,19 @@ export const sendReqData = val => async dispatch => {
     res = await sendsay.request({...parseReq}); 
     dispatch({type: RES_ERR, payload: false});
   } catch (error) {
-    if(error.id?.split('/')[1] === "auth") return "logout";
+    if(error.id?.split('/')[1] === "auth"){
+      dispatch({type: REQ_LOADING, payload: false});
+      return "logout";
+    };
     res = error;
     isErr = true;
   }
   if(res.sublogin) delete res.sublogin;
   dispatch({type: RES_DATA, payload: res});
   dispatch({type: RES_ERR, payload: isErr});
-  dispatch({type: REQ_HISTORY, payload: writeResHistory(parseReq, isErr)});
+  
+  const reqHistory = ResHistory.writeResHistory(parseReq, isErr);
+  if(reqHistory){
+    dispatch({type: REQ_HISTORY, payload: ResHistory.writeResHistory(parseReq, isErr)});
+  }
 };
