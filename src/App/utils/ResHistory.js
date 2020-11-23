@@ -14,10 +14,9 @@ class ResHistory {
     return uniqueHistory;
   }
 
-  deleteHistoryItem (item) {
-    const stringedItem = JSON.stringify(item);
+  deleteReqItemById (actionId) {
     const filteredArr = this.historyItems.filter(el=>{
-      return JSON.stringify(el) !== stringedItem;
+      return el.actionId !== actionId;
     });
     this.historyItems = filteredArr;
     localStorage.setItem('reqItems', JSON.stringify(this.historyItems));

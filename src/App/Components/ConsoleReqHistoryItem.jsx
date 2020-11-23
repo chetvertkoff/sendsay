@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import useAuth from '../hooks/useAuth';
 import { deleteReqHistoryItem } from '../Store/Action/consoleReqHistory';
@@ -9,10 +9,9 @@ const ConsoleReqHistoryItem = props => {
   const item = props.item;
   const classIndicator = item.isErr ? "req-item__inner_err" : "req-item__inner_success";
   let classes = ['req-item__inner', classIndicator];
-  const [copyClass, setClass] = useState(classes);
+  const [copyClass, setClass] = useState('');
   const {logOut} = useAuth();
 
-// console.log(copyClass,classes, item);
 
   const copyText = () => {
     const copyReq = JSON.stringify({...item, isErr: undefined});
@@ -27,19 +26,16 @@ const ConsoleReqHistoryItem = props => {
   }
 
   const copy = () => {
-    copyClass.push('req-item__inner_copied');
-    setClass([...copyClass]);
+    setClass('req-item__inner_copied');
     copyText();
     setTimeout(() => {
-      let newCopyClasses = copyClass.filter(el=>el!='req-item__inner_copied');
-      setClass([...newCopyClasses]);
+      setClass('');
     }, 500);
   }
 
-  const deleteReqItem = useCallback(()=>{
-    console.log(item);
-    props.deleteReqHistoryItem(item);
-  },[])
+  const deleteReqItem = ()=>{
+    props.deleteReqHistoryItem(item.actionId);
+  }
 
   const fulfilReq = useCallback(()=>{
     const req = fillReqField();
@@ -61,7 +57,7 @@ const ConsoleReqHistoryItem = props => {
     <li 
       className="console__req-item req-item"
     >
-      <div className={copyClass.join(' ')} onClick={fillReqField}>
+      <div className={[...classes, copyClass].join(' ')} onClick={fillReqField}>
         {item.action}
       </div>
       <svg 

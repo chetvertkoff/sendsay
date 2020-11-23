@@ -206,7 +206,10 @@
   background-color: #F6F6F6;
   cursor: pointer;
   box-shadow: -16px 0px 12px -6px #F6F6F6;
+  border: none;
   border-left: 1px solid rgba(0, 0, 0, 0.2);
+  z-index: 99;
+  outline: none;
 }
 
 .console .console__body {

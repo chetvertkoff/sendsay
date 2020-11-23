@@ -35,7 +35,8 @@ export const sendReqData = val => async dispatch => {
   if(res.sublogin) delete res.sublogin;
   dispatch({type: RES_DATA, payload: res});
   dispatch({type: RES_ERR, payload: isErr});
-  
+
+  parseReq.actionId = '_' + Math.random().toString(36).substr(2, 9);
   const reqHistory = ResHistory.writeResHistory(parseReq, isErr);
   if(reqHistory){
     dispatch({type: REQ_HISTORY, payload: ResHistory.writeResHistory(parseReq, isErr)});

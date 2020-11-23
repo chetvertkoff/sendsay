@@ -27,7 +27,7 @@ const ConsoleReqHistory = (props) => {
 
   const scroll = useCallback((e = {}) => { 
     if(currentId != null) return;
-
+    
     let item = e.currentTarget || null;
     const optionsUI = JSON.parse(localStorage.getItem('optionsUI')) || {};
     if(!optionsUI.scrollPos) optionsUI.scrollPos = 0;
@@ -47,18 +47,6 @@ const ConsoleReqHistory = (props) => {
     localStorage.setItem('optionsUI', JSON.stringify({...optionsUI, scrollPos: optionsUI.scrollPos}));
   },[currentId]);
 
-  const disableDocScroll = e => {
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop; 
-    const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
-
-    window.onscroll = ()=>{ 
-      window.scrollTo(scrollLeft, scrollTop); 
-    };
-  }
-
-  const enableDocScroll = e => {
-    window.onscroll=()=>{}
-  }
 
   const setDrop = useCallback(e=>{
     const id = e.target.id;
@@ -69,13 +57,9 @@ const ConsoleReqHistory = (props) => {
     setID(id);
   },[currentId])
 
-  console.log(props.reqHistory);
-
   return (
     <div 
       className="console__req-history console_block"
-      onMouseEnter={disableDocScroll} 
-      onMouseLeave={enableDocScroll} 
     >
       <ul 
         className={droppedClasses.join(' ')}
@@ -94,11 +78,11 @@ const ConsoleReqHistory = (props) => {
           })
         }
       </ul>
-      <div className="console__clear-button">
+      <button className="console__clear-button">
         <svg className="icon">
           <use xlinkHref="/assets/icon/sprite.svg#times"></use>
         </svg>
-      </div>
+      </button>
     </div>
   );
 }
