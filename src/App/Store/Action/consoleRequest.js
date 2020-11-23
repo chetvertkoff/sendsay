@@ -39,6 +39,6 @@ export const sendReqData = val => async dispatch => {
   parseReq.actionId = '_' + Math.random().toString(36).substr(2, 9);
   const reqHistory = ResHistory.writeResHistory(parseReq, isErr);
   if(reqHistory){
-    dispatch({type: REQ_HISTORY, payload: ResHistory.writeResHistory(parseReq, isErr)});
+    dispatch({type: REQ_HISTORY, payload: reqHistory});
   }
 };

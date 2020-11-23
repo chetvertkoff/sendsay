@@ -42,17 +42,17 @@ const ConsoleReqHistoryItem = props => {
     sendReqData(req);
   },[]);
 
-  const fillReqField = useCallback(()=>{
+  const fillReqField = ()=>{
     const formattedText = JSON.stringify({action: item.action}, null, 2);
     props.getReqData(formattedText);
     return formattedText;
-  },[]);
+  }
 
   const sendReqData = async (req) =>{
     const res = await props.sendReqData(req);
     if(res == "logout") logOut();
   }
-
+console.log('render');
   return (
     <li 
       className="console__req-item req-item"
