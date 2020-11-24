@@ -1,7 +1,8 @@
 import React from 'react';
-
 import AceEditor from "react-ace";
+
 import "ace-builds/src-noconflict/mode-json";
+import "ace-builds/src-noconflict/theme-github";
 
 const ConsoleEditor = props => {
   return (
@@ -10,11 +11,16 @@ const ConsoleEditor = props => {
       <div className="console__editor">
         <AceEditor
           mode="json"
+          theme="github"
           name={props.name}
           value={props.value}
           width="100%"
           height="100%"
-          setOptions={props.options}
+          setOptions={{
+            ...props.options, 
+            useWorker: false,
+            fontSize: 14
+          }}
           onChange={props.getDataEditor}
         />
       </div>

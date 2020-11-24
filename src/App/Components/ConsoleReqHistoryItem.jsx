@@ -52,7 +52,7 @@ const ConsoleReqHistoryItem = props => {
     const res = await props.sendReqData(req);
     if(res == "logout") logOut();
   }
-console.log('render');
+
   return (
     <li 
       className="console__req-item req-item"
