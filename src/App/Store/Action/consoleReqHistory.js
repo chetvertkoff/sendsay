@@ -4,3 +4,7 @@ import { REQ_HISTORY } from "../types";
 export const deleteReqHistoryItem = id => dispatch => {
   dispatch({type: REQ_HISTORY, payload: ResHistory.deleteReqItemById(id)});
 }
+
+export const deleteHistory = () => dispatch => {
+  dispatch({type: REQ_HISTORY, payload: ResHistory.deleteAllHistoryItems()});
+}

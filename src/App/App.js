@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import {BrowserRouter, Route, Switch} from 'react-router-dom'
+import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom'
 import { createStore, applyMiddleware } from 'redux';
 import {Provider} from 'react-redux'
 import thunk from 'redux-thunk'
@@ -15,12 +15,21 @@ const store = createStore(rootReducer, applyMiddleware(thunk))
 const App = ()=>{
   const {isAuthorized} = useAuth();
 
+  const isAuth = () => {
+    if(isAuthorized()) {
+      return (
+        <>
+          <Route path="/" exact component={Console} />
+          <Route render={() => <Redirect to="/" />} /> 
+        </>
+      )
+    }
+    return <Route path="/login" component={Auth} />
+  }
+
   return(
     <Switch>
-      {isAuthorized() ? 
-          <Route path="/" exact component={Console} /> 
-        :
-          <Route path="/login" component={Auth} />}
+      {isAuth()}
     </Switch>
   );
 }

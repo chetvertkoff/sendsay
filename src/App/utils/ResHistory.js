@@ -25,6 +25,12 @@ class ResHistory {
     return this.historyItems;
   }
 
+  deleteAllHistoryItems () {
+    this.historyItems = [];
+    localStorage.setItem('reqItems', JSON.stringify(this.historyItems));
+    return this.historyItems;
+  }
+
   #uniqueArr(reqItem){
     for(const el of this.historyItems){
       if(this.#isEqualObjects(reqItem, el)){
@@ -52,7 +58,6 @@ class ResHistory {
   
     return true;
   }
-
 }
 
 export default new ResHistory();

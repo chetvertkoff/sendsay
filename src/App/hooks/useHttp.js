@@ -8,6 +8,7 @@ export const useHttp = () =>{
     const sendsay = new Sendsay();
     setLoading(true);
     try {
+      sendsay.setSessionFromCookie();
       const action = req.action;
       const response = await sendsay.request({...req, action});
       setLoading(false);

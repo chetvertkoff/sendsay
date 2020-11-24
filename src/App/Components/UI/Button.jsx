@@ -9,8 +9,11 @@ const Button = props => {
     props.onClick && props.onClick()
   }
 
-  let classes = ['button', ...props.classes];
-
+  let classes = ['button'];
+  if(props.classes?.length){
+    classes = [classes, ...props.classes];
+  }
+  
   if(props.disabled) classes.push('button_disabled');
   else classes = classes.filter(el=>el!=='button_disabled');
 

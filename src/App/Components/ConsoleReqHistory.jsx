@@ -1,29 +1,15 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { connect } from 'react-redux';
+import { deleteHistory } from '../Store/Action/consoleReqHistory';
 import ConsoleReqHistoryItem from './ConsoleReqHistoryItem';
 
 const ConsoleReqHistory = (props) => {
-  const [currentId, setID] = useState(null);
+const [currentId, setID] = useState(null);
   const el = useRef(null);
   const droppedClasses = ['console__req-list'];
 
   if(currentId != null) droppedClasses.push('console__req-list_dropped');
   else droppedClasses.filter(el=>el!=='console__req-list_dropped');
-
-  useEffect(()=>{
-    scroll();
-
-    const handleClickOutside = e => {
-      if (!el.current.contains(e.target)) {
-        setID(null);
-      }
-    }
-    document.addEventListener("click", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  },[]);
 
   const scroll = useCallback((e = {}) => { 
     if(currentId != null) return;
@@ -57,6 +43,21 @@ const ConsoleReqHistory = (props) => {
     setID(id);
   },[currentId])
 
+  useEffect(()=>{
+    scroll();
+
+    const handleClickOutside = e => {
+      if (!el.current.contains(e.target)) {
+        setID(null);
+      }
+    }
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  },[]);
+
   return (
     <div 
       className="console__req-history console_block"
@@ -78,7 +79,7 @@ const ConsoleReqHistory = (props) => {
           })
         }
       </ul>
-      <button className="console__clear-button">
+      <button className="console__clear-button" onClick={()=>props.deleteHistory()}>
         <svg className="icon">
           <use xlinkHref="/assets/icon/sprite.svg#times"></use>
         </svg>
@@ -91,4 +92,8 @@ const mapStateToProps = state => ({
   reqHistory: state.consoleReqHistory.reqHistory
 })
 
-export default connect(mapStateToProps, null)(ConsoleReqHistory);
+const mapDispatchToProps = dispatch => ({
+  deleteHistory:()=>dispatch(deleteHistory())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(ConsoleReqHistory);
