@@ -393,13 +393,28 @@
   top: 50%;
   left: 50%;
   z-index: 999;
-
   background: #fff;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   transform: translate(-30%, -30%);
   padding: 20px;
   height: 25%;
   width: 280px;
+  transform: translate(-50%, -50%);
+}
+
+.console .console__modal.modal-window .modal-window__close-button {
+  background: transparent;
+  outline: none;
+  border: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 10px;
+}
+
+.console .console__modal.modal-window .modal-window__close-button .modal-window__close-button-icon {
+  font-size: 6px;
+  cursor: pointer;
 }
 
 .console .modal-window .modal-window__wrapper{
@@ -410,7 +425,7 @@
 
 .console .modal-window .modal-window__wrapper .modal-window__title {
   font-weight: 500;
-  font-size: 1.6em;
+  font-size: 1.4em;
   text-align: center;
 }
 
@@ -420,14 +435,14 @@
   justify-content: space-around;
 }
 
-.button-cancel {
+.modal-window .button-group  .button-cancel {
   background: linear-gradient(0deg, #C4C4C4, #C4C4C4), linear-gradient(180deg, #45A6FF 0%, #0055FB 100%);
 }
 
-.button-danger {
-  background-attachment: fixed;
+.modal-window .button-group .button-danger {
+  background: red
 }
 
-.button-cancel :hover, .button-danger :hover {
-  opacity: 0.8;
+.modal-window .button-group .button-danger:hover,  .modal-window .button-group .button-cancel:hover{
+  opacity: 0.7;
 }

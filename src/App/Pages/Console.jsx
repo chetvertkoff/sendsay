@@ -7,8 +7,9 @@ import { useHttp } from '../hooks/useHttp';
 import ConsoleWindowLoader from '../Components/ConsoleWindowLoader';
 import useAuth from '../hooks/useAuth';
 import ConsoleModalWindow from './../Components/ConsoleModalWindow';
+import { connect } from 'react-redux';
 
-const Console = ()=>{
+const Console = props => {
   const el = useRef(null);
   const {request} = useHttp();
   const {logOut} = useAuth();
@@ -40,12 +41,14 @@ const Console = ()=>{
       <ConsoleReqHistory />
       <ConsoleBody />
       <ConsoleFooter />
-      {
-        showLoader && <ConsoleWindowLoader fadeOutClass={fadeOutClass} />
-      }
-      <ConsoleModalWindow />
+      {showLoader && <ConsoleWindowLoader fadeOutClass={fadeOutClass} />}
+      {props.modal?.showModal && <ConsoleModalWindow options={props.modal}/>}
     </section>
   )
 }
 
-export default Console;
+const mapStateToProps = state => ({
+  modal: state.consoleModal.modal
+})
+
+export default connect(mapStateToProps, null)(Console);

@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import useAuth from '../hooks/useAuth';
-import { deleteReqHistoryItem } from '../Store/Action/consoleReqHistory';
+import { showModal } from '../Store/Action/consoleModal';
 import { getReqData, sendReqData } from '../Store/Action/consoleRequest';
 import ReqDropCard from './UI/ReqDropCard';
 
@@ -34,7 +34,11 @@ const ConsoleReqHistoryItem = props => {
   }
 
   const deleteReqItem = ()=>{
-    props.deleteReqHistoryItem(item.actionId);
+    props.showModal({
+      showModal: true,
+      title: `Удалить ${item.action} ?`,
+      item: item.actionId
+    });
   }
 
   const fulfilReq = useCallback(()=>{
@@ -81,7 +85,7 @@ const ConsoleReqHistoryItem = props => {
 const mapDispatchToProps = dispatch => ({
   getReqData: val=>dispatch(getReqData(val)),
   sendReqData: val=>dispatch(sendReqData(val)),
-  deleteReqHistoryItem: val=>dispatch(deleteReqHistoryItem(val))
+  showModal: val=>dispatch(showModal(val))
 })
 
 export default connect(null, mapDispatchToProps)(ConsoleReqHistoryItem);

@@ -4,7 +4,7 @@ import { deleteHistory } from '../Store/Action/consoleReqHistory';
 import ConsoleReqHistoryItem from './ConsoleReqHistoryItem';
 
 const ConsoleReqHistory = (props) => {
-const [currentId, setID] = useState(null);
+  const [currentId, setID] = useState(null);
   const el = useRef(null);
   const droppedClasses = ['console__req-list'];
 
@@ -59,9 +59,7 @@ const [currentId, setID] = useState(null);
   },[]);
 
   return (
-    <div 
-      className="console__req-history console_block"
-    >
+    <div className="console__req-history console_block">
       <ul 
         className={droppedClasses.join(' ')}
         onWheel={scroll}

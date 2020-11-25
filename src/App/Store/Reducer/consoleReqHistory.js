@@ -2,7 +2,7 @@ import { REQ_HISTORY } from '../types';
 
 const initialHistory = JSON.parse(localStorage.getItem('reqItems')) || [];
 const initialState = {
-  reqHistory: initialHistory
+  reqHistory: initialHistory,
 }
 
 const consoleReqHistory = (state = initialState, action) => {
