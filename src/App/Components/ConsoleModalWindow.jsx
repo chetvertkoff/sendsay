@@ -1,36 +1,64 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { connect } from 'react-redux';
 import { closeModal } from '../Store/Action/consoleModal';
+import { deleteHistory, deleteReqHistoryItem } from '../Store/Action/consoleReqHistory';
 import Button from './UI/Button';
 
 const ConsoleModalWindow = props => {
+  const el = useRef();
+  const item = props.options;
+  const [classes, setClasses] = useState(['console__modal', 'modal-window', 'modal-window_open']);
 
   const closeWindow = () =>{
-    props.closeModal();
+    const openWindowClass = [...classes, 'modal-window_close'];
+    setClasses(openWindowClass);
+    setTimeout(() => {
+      props.closeModal();
+    }, 450);
+  }
+
+  const remove = () => {
+    if(item.actionId){
+      props.deleteReqHistoryItem(item.actionId);
+    }else {
+      props.deleteHistory();
+    }
+    closeWindow();
   }
 
   useEffect(()=>{
-
-    const handleClickOutside = e => {
-      if (!el.current.contains(e.target)) {
+    const handleCLickOutside = e => {
+      if (!el.current?.contains(e.target)) {
         closeWindow();
       }
     }
-    document.addEventListener("click", handleClickOutside);
+
+    const handleEscapeOutside = e => {
+      if (e.key === 'Escape') {
+        closeWindow();
+      }
+    }
+
+    document.addEventListener("click", handleCLickOutside);
+    document.addEventListener("keydown", handleEscapeOutside);
 
     return () => {
-      document.removeEventListener("click", handleClickOutside);
+      document.removeEventListener("click", handleCLickOutside);
+      document.removeEventListener("keydown", handleEscapeOutside);
     };
   },[]);
 
+  console.log('render');
+
   return (
-    <div className="console__modal modal-window">
+    <div className={classes.join(' ')} ref={el}>
       <div className="modal-window__wrapper">
-        <h3 className="modal-window__title">{props.options.title}</h3>
+        <h3 className="modal-window__title">{item.title}</h3>
         <div className="modal-window__button-group button-group"> 
           <Button 
             title="Удалить"
             classes={["button-danger"]}
+            onClick={()=>remove()}
           />
           <Button 
             title="Отменить"
@@ -50,8 +78,9 @@ const ConsoleModalWindow = props => {
 
 
 const mapDispatchToProps = dispatch => ({
-  closeModal: ()=>dispatch(closeModal())
-  // deleteReqHistoryItem: val=>dispatch(deleteReqHistoryItem(val))
+  closeModal: () => dispatch(closeModal()),
+  deleteHistory: () => dispatch(deleteHistory()),
+  deleteReqHistoryItem: id => dispatch(deleteReqHistoryItem(id))
 })
 
 export default connect(null, mapDispatchToProps)(ConsoleModalWindow);

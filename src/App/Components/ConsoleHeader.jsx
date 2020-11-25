@@ -9,12 +9,12 @@ const ConsoleHeader = props => {
   const {login, sublogin} = JSON.parse(localStorage.getItem('user_info'));
 
   useEffect(()=>{
-    const fullScreenCancelOnEscPress = () => {
+    const fullScreenEvent = () => {
       setFullScreen(!!fscreen.fullscreenElement);
     }
-    fscreen.addEventListener('fullscreenchange', fullScreenCancelOnEscPress);
+    fscreen.addEventListener('fullscreenchange', fullScreenEvent);
     return ()=>{
-      fscreen.removeEventListener('fullscreenchange', fullScreenCancelOnEscPress);
+      fscreen.removeEventListener('fullscreenchange', fullScreenEvent);
     }
   },[]);
 

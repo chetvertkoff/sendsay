@@ -12,7 +12,6 @@ const ConsoleReqHistoryItem = props => {
   const [copyClass, setClass] = useState('');
   const {logOut} = useAuth();
 
-
   const copyText = () => {
     const copyReq = JSON.stringify({...item, isErr: undefined});
     const el = document.createElement("input");
@@ -37,7 +36,7 @@ const ConsoleReqHistoryItem = props => {
     props.showModal({
       showModal: true,
       title: `Удалить ${item.action} ?`,
-      item: item.actionId
+      actionId: item.actionId
     });
   }
 

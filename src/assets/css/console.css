@@ -127,6 +127,7 @@
   overflow-x: scroll;
   margin: 0;
   min-width: 103px;
+  scrollbar-width: none;
 }
 
 .console .console__req-list.console__req-list_dropped {
@@ -272,7 +273,7 @@
   background: #fff;
   border-radius: 8px;
   border: 1px solid rgba(0, 0, 0, 0.2);
-  height: 95%;
+  height: 100%;
 }
 
 .console .console__editor-wrap.console__editor-wrap_err .console__editor {
@@ -400,6 +401,41 @@
   height: 25%;
   width: 280px;
   transform: translate(-50%, -50%);
+}
+
+.console .console__modal.modal-window.modal-window_open {
+  animation: window_open 0.5s ease-out;
+}
+
+@keyframes window_open {
+  0% {
+    top: 115%;
+    opacity: 0;
+  }
+  50% {
+    top: 40%;
+    opacity: 0.5;
+  }
+  100% {
+    top: 50%;
+    opacity: 1;
+  }
+}
+
+.console .console__modal.modal-window.modal-window_close {
+  animation: window_close 0.5s ease-in;
+}
+
+@keyframes window_close {
+  0% {
+    top: 50%;
+  }
+  50% {
+    top: 60%;
+  }
+  100% {
+    top: -16%;
+  }
 }
 
 .console .console__modal.modal-window .modal-window__close-button {

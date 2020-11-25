@@ -4,7 +4,7 @@ const initialState = {
   modal: {
     showModal:false,
     title: '',
-    item: null
+    actionId: null
   }
 }
 

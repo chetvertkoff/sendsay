@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { connect } from 'react-redux';
 import { deleteHistory } from '../Store/Action/consoleReqHistory';
 import ConsoleReqHistoryItem from './ConsoleReqHistoryItem';
+import { showModal } from './../Store/Action/consoleModal';
 
 const ConsoleReqHistory = (props) => {
   const [currentId, setID] = useState(null);
@@ -43,6 +44,14 @@ const ConsoleReqHistory = (props) => {
     setID(id);
   },[currentId])
 
+  const deleteHistory = () => {
+    props.showModal({
+      showModal: true,
+      title: `Удалить историю запросов ?`,
+      actionId: null
+    })
+  }
+
   useEffect(()=>{
     scroll();
 
@@ -66,22 +75,22 @@ const ConsoleReqHistory = (props) => {
         onClick={setDrop}
         ref={el}
       >
-        {
-          [...props.reqHistory].reverse().map((el, i) =>{
-            return <ConsoleReqHistoryItem 
-              key={i} 
-              i={i} 
-              item={el} 
-              showDrop={i == currentId} 
-            />
-          })
-        }
+      {[...props.reqHistory].reverse().map((el, i) =>{
+        return <ConsoleReqHistoryItem 
+          key={i} 
+          i={i} 
+          item={el} 
+          showDrop={i == currentId} 
+        />
+      })}
       </ul>
-      <button className="console__clear-button" onClick={()=>props.deleteHistory()}>
-        <svg className="icon">
-          <use xlinkHref="/assets/icon/sprite.svg#times"></use>
-        </svg>
-      </button>
+      {props.reqHistory?.length ? 
+        <button className="console__clear-button" onClick={()=>deleteHistory()}>
+          <svg className="icon">
+            <use xlinkHref="/assets/icon/sprite.svg#times"></use>
+          </svg>
+        </button> 
+      : null}
     </div>
   );
 }
@@ -91,7 +100,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  deleteHistory:()=>dispatch(deleteHistory())
+  showModal:val=>dispatch(showModal(val))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ConsoleReqHistory);

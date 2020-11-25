@@ -6,6 +6,6 @@ export const closeModal = () => dispatch => {
   dispatch({type: MODAL, payload: {
     showModal:false,
     title: '',
-    item: null
+    actionId: null
   }});
 }

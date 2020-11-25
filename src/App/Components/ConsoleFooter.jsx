@@ -5,6 +5,8 @@ import Button from './UI/Button';
 import Validate from '../utils/validate';
 import useAuth from '../hooks/useAuth';
 
+
+
 const ConsoleFooter = props => {
   const {logOut} = useAuth();
 
