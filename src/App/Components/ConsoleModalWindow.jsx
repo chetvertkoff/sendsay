@@ -48,7 +48,6 @@ const ConsoleModalWindow = props => {
     };
   },[]);
 
-  console.log('render');
 
   return (
     <div className={classes.join(' ')} ref={el}>
