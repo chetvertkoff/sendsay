@@ -4,7 +4,6 @@ import useAuth from '../hooks/useAuth';
 import Logo from './Logo';
 
 const ConsoleHeader = props => {
-  
   const [isFullscreen, setFullScreen] = useState(false);
   const {logOut} = useAuth();
   const {login, sublogin} = JSON.parse(localStorage.getItem('user_info'));
