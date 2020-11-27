@@ -32,7 +32,7 @@ module.exports = {
     }
   },
   output: {
-    filename: `${PATHS.assets}js/[name].[hash].js`,
+    filename: `${PATHS.assets}js/[name].[fullhash].js`,
     path: PATHS.dist,
     publicPath: '/',
     sourceMapFilename: 'bundle.map'
@@ -42,8 +42,8 @@ module.exports = {
     // JS
     {
       test: /\.(js|jsx)$/,
-      loader: 'babel-loader',
-      exclude: '/node_modules/' 
+      exclude: /node_modules/,
+      use: ['babel-loader'],
     },{
       test: /\.(png|jpg|gif|svg)$/,
       loader: 'file-loader',
@@ -60,28 +60,23 @@ module.exports = {
           options: { sourceMap: true }
         }, {
           loader: 'postcss-loader',
-          options: { sourceMap: true, config: { path: `./build/postcss.config.js` } }
+          options: { sourceMap: true, postcssOptions: { config: `./build/postcss.config.js` } }
         }
       ]
     }]
   },
 
   resolve: {
-    extensions: [".jsx", ".js"]
+    extensions: ["*", ".jsx", ".js"]
   },
 
   plugins: [
     new MiniCssExtractPlugin({
-      filename: `${PATHS.assets}css/[name].css`,
+      filename: `${PATHS.assets}css/[name].[contenthash].css`,
     }),
-    new HtmlWebpackPlugin({
-      template: `${PATHS.src}/index.html`,
-      filename: './index.html',
-      inject: true
-    }),
+    new HtmlWebpackPlugin(),
     new CopyWebpackPlugin({
       patterns: [
-        { from: `${PATHS.src}/`, to: '/assets' },
         {from: `${PATHS.src}/${PATHS.assets}icon`,
         to: `${PATHS.assets}icon`}
       ]
