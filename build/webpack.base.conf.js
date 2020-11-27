@@ -70,6 +70,7 @@ module.exports = {
     extensions: ["*", ".jsx", ".js"]
   },
 
+  
   plugins: [
     new MiniCssExtractPlugin({
       filename: `${PATHS.assets}css/[name].[contenthash].css`,
