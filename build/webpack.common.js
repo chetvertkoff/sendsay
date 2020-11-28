@@ -1,5 +1,4 @@
 const path = require('path');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
@@ -19,23 +18,10 @@ module.exports = {
   entry: {
     app: PATHS.src,
   },
-  optimization: {
-    splitChunks: {
-      cacheGroups: {
-        vendor: {
-          filename: 'assets/js/vendor.js',
-          test: /node_modules/,
-          chunks: 'all',
-          enforce: true
-        }
-      }
-    }
-  },
   output: {
-    filename: `${PATHS.assets}js/[name].[fullhash].js`,
     path: PATHS.dist,
+    filename: '[name].bundle.js',
     publicPath: '/',
-    sourceMapFilename: 'bundle.map'
   },
   module: {
     rules: [
@@ -54,13 +40,9 @@ module.exports = {
       test: /\.css$/,
       use: [
         'style-loader',
-        MiniCssExtractPlugin.loader,
         {
           loader: 'css-loader',
           options: { sourceMap: true }
-        }, {
-          loader: 'postcss-loader',
-          options: { sourceMap: true, postcssOptions: { config: `./build/postcss.config.js` } }
         }
       ]
     }]
@@ -71,16 +53,17 @@ module.exports = {
   },
 
   plugins: [
-    new MiniCssExtractPlugin({
-      filename: `${PATHS.assets}css/[name].[contenthash].css`,
-    }),
-    new HtmlWebpackPlugin(),
+    new CleanWebpackPlugin(),
     new CopyWebpackPlugin({
       patterns: [
         {from: `${PATHS.src}/${PATHS.assets}icon`,
         to: `${PATHS.assets}icon`}
       ]
     }),
-    new CleanWebpackPlugin()
+    new HtmlWebpackPlugin({
+      template: `${PATHS.src}/index.html`,
+      filename: 'index.html',
+      // inject: true
+    }),
   ],
 }

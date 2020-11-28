@@ -1,3 +1,10 @@
+
+@import "./auth.css";
+@import "./console.css";
+@import "./spinner.css";
+
+
+
 body, html, #root{
   margin: 0;
   padding: 0;
@@ -30,7 +37,4 @@ h1, h2, h3, h4, h5, h6, p{
 use {
   pointer-events: none;
 }
-
-@import "./auth.css";
-@import "./console.css";
 

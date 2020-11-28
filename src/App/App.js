@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { lazy, Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom'
 import { createStore, applyMiddleware } from 'redux';
@@ -7,8 +7,9 @@ import thunk from 'redux-thunk'
 
 import rootReducer from './Store/Reducer/rootReducer';
 import useAuth from './hooks/useAuth';
-import Auth from './Pages/Auth';
-import Console from './Pages/Console';
+
+const Auth = lazy(() => import("./Pages/Auth"));
+const Console = lazy(() => import("./Pages/Console"));
 
 const store = createStore(rootReducer, applyMiddleware(thunk))
 
@@ -29,7 +30,9 @@ const App = ()=>{
 
   return(
     <Switch>
-      {isAuth()}
+      <Suspense fallback="">
+        {isAuth()}
+      </Suspense>
     </Switch>
   );
 }

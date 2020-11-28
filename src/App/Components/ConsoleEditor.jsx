@@ -1,8 +1,8 @@
 import React from 'react';
 import AceEditor from "react-ace";
 
-import "ace-builds/src-noconflict/mode-json";
-import "ace-builds/src-noconflict/theme-github";
+import "ace-builds/src-min-noconflict/mode-json";
+import "ace-builds/src-min-noconflict/theme-github";
 
 const ConsoleEditor = props => {
   return (
