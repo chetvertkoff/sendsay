@@ -256,12 +256,15 @@
 .console .console__body {
   height: 100%;
   background: #fff;
-  overflow-x: auto;
+  display: flex;
+  flex-direction: column;
+  max-height: 100%;
 }
 
 .console .console__body .body__table {
   height: 100%;
   width: 100%;
+  border-collapse: collapse;
 }
 
 .console .console__editor-wrap {
@@ -273,7 +276,13 @@
   background: #fff;
   border-radius: 8px;
   border: 1px solid rgba(0, 0, 0, 0.2);
-  height: 100%;
+  height: calc(100% - 30px);
+}
+
+@-moz-document url-prefix() {
+  .console .console__editor-wrap .console__editor {
+    height: calc(100% - 50px);
+  }
 }
 
 .console .console__editor-wrap.console__editor-wrap_err .console__editor {

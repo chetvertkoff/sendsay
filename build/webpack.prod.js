@@ -42,7 +42,7 @@ const buildWebpackConfig = merge(baseWebpackConfig, {
     }]
   },
   plugins: [
-    new BundleAnalyzerPlugin(),
+    // new BundleAnalyzerPlugin(),
     new MiniCssExtractPlugin({
       filename: `${baseWebpackConfig.externals.paths.assets}css/[name].[contenthash].css`,
     }),

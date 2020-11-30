@@ -6,7 +6,7 @@ import "ace-builds/src-min-noconflict/theme-github";
 
 const ConsoleEditor = props => {
   return (
-    <td className={`console__editor-wrap ${props.err && "console__editor-wrap_err"}`}>
+    <td className={`console__editor-wrap ${props.err && "console__editor-wrap_err" || ""}`}>
       <span className="console__editor-title">{props.title}</span>
       <div className="console__editor">
         <AceEditor

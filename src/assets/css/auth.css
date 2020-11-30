@@ -133,9 +133,10 @@ h3{
   margin-top: 4px;
   border-radius: 4px;
   border: 1px solid rgba(0, 0, 0, 0.2);
-  line-height: 2em;
-  padding: 0 5px;
+  padding: 5px;
   box-sizing: border-box; 
+  min-height: 30px;
+  font-size: 0.9em;
 }
 
 .form .form__input-text_pass{

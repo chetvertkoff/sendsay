@@ -1,8 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { connect } from 'react-redux';
-import { deleteHistory } from '../Store/Action/consoleReqHistory';
 import ConsoleReqHistoryItem from './ConsoleReqHistoryItem';
-import { showModal } from './../Store/Action/consoleModal';
+import ConsoleClearButton from './UI/ConsoleClearButton';
 
 const ConsoleReqHistory = (props) => {
   const [currentId, setID] = useState(null);
@@ -44,14 +43,6 @@ const ConsoleReqHistory = (props) => {
     setID(id);
   },[currentId])
 
-  const deleteHistory = () => {
-    props.showModal({
-      showModal: true,
-      title: `Удалить историю запросов ?`,
-      actionId: null
-    })
-  }
-
   useEffect(()=>{
     scroll();
 
@@ -84,13 +75,7 @@ const ConsoleReqHistory = (props) => {
         />
       })}
       </ul>
-      {props.reqHistory?.length ? 
-        <button className="console__clear-button" onClick={()=>deleteHistory()}>
-          <svg className="icon">
-            <use xlinkHref="/assets/icon/sprite.svg#times"></use>
-          </svg>
-        </button> 
-      : null}
+      {props.reqHistory?.length && <ConsoleClearButton /> }
     </div>
   );
 }
@@ -99,8 +84,4 @@ const mapStateToProps = state => ({
   reqHistory: state.consoleReqHistory.reqHistory
 })
 
-const mapDispatchToProps = dispatch => ({
-  showModal:val=>dispatch(showModal(val))
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(ConsoleReqHistory);
+export default connect(mapStateToProps, null)(ConsoleReqHistory);
