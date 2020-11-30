@@ -5,7 +5,7 @@ import { deleteHistory, deleteReqHistoryItem } from '../Store/Action/consoleReqH
 import Button from './UI/Button';
 
 const shouldComponentUpdate  = (prev, next) => {
-  return !!prev.modal.title === next.modal.title
+  return !!prev.modal.title === next.modal.title;
 }
 
 const ConsoleModalWindow = memo(props => {
@@ -19,7 +19,6 @@ const ConsoleModalWindow = memo(props => {
     setClasses(openWindowClass);
     setTimeout(() => {
       props.closeModal();
-
     }, 450);
     document.removeEventListener("click", handleCLickOutside);
     document.removeEventListener("keydown", handleEscapeOutside);
@@ -50,7 +49,7 @@ const ConsoleModalWindow = memo(props => {
     document.addEventListener("click", handleCLickOutside);
     document.addEventListener("keydown", handleEscapeOutside);
   },[]);
-console.log('render');
+
   return (
     <div className={classes.join(' ')} ref={el}>
       <div className="modal-window__wrapper">
@@ -76,7 +75,6 @@ console.log('render');
     </div>
   );
 }, shouldComponentUpdate)
-
 
 const mapStateToProps = state => ({
   modal: state.consoleModal.modal

@@ -7,8 +7,9 @@ import Cookies from 'js-cookie';
 import { useHistory } from 'react-router-dom';
 
 const Auth = ()=>{
-  const {loading, request} = useHttp();
+  const {request} = useHttp();
   const [errMessage, setErrMessage] = useState('');
+  const [loading, setLoading] = useState(false);
   const history = useHistory();
 
   // Логин: chetvertkoffkirill@gmail.com
@@ -17,8 +18,9 @@ const Auth = ()=>{
   const reqLogin = async fields => {
     const {login, sublogin} = fields;
     const userInfo = JSON.stringify({login, sublogin});
+    setLoading(true);
     const res = await request(fields);
-
+    setLoading(false);
     if(!res.session) return res;
     Cookies.set('sendsay_session', res.session, { expires: 7 });
     localStorage.setItem('user_info', userInfo);

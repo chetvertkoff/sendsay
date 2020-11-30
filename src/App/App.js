@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from 'react';
+import React, { lazy, Suspense, useCallback } from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom'
 import { createStore, applyMiddleware } from 'redux';
@@ -10,14 +10,16 @@ import useAuth from './hooks/useAuth';
 
 const Auth = lazy(() => import("./Pages/Auth"));
 const Console = lazy(() => import("./Pages/Console"));
+import Cookies from 'js-cookie';
 
 const store = createStore(rootReducer, applyMiddleware(thunk))
 
 const App = ()=>{
   const {isAuthorized} = useAuth();
 
-  const isAuth = () => {
+  const isAuth = useCallback(() => {
     if(isAuthorized()) {
+      console.log('render');
       return (
         <>
           <Route path="/" exact component={Console} />
@@ -26,7 +28,7 @@ const App = ()=>{
       )
     }
     return <Route path="/login" component={Auth} />
-  }
+  }, [])
 
   return(
     <Switch>

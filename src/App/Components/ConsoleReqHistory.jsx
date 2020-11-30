@@ -75,7 +75,7 @@ const ConsoleReqHistory = (props) => {
         />
       })}
       </ul>
-      {props.reqHistory?.length && <ConsoleClearButton /> }
+      {props.reqHistory?.length && <ConsoleClearButton /> || null }
     </div>
   );
 }

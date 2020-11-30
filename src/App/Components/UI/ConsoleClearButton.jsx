@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { showModal } from '../../Store/Action/consoleModal';
 
 const ConsoleClearButton = props => {
+  
   const deleteHistory = () => {
     props.showModal({
       showModal: true,
