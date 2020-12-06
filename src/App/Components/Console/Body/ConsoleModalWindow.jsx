@@ -1,8 +1,8 @@
 import React, { memo, useEffect, useRef, useState } from 'react';
 import { connect } from 'react-redux';
-import { closeModal } from '../Store/Action/consoleModal';
-import { deleteHistory, deleteReqHistoryItem } from '../Store/Action/consoleReqHistory';
-import Button from './UI/Button';
+import { closeModal } from '../../../Store/Action/consoleModal';
+import { deleteHistory, deleteReqHistoryItem } from '../../../Store/Action/consoleReqHistory';
+import Button from '../../UI/Button';
 
 const shouldComponentUpdate  = (prev, next) => {
   return !!prev.modal.title === next.modal.title;

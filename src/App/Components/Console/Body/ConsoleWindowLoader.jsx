@@ -1,6 +1,6 @@
 import React, {useEffect, useState } from 'react';
-import useAuth from '../hooks/useAuth';
-import { useHttp } from './../hooks/useHttp';
+import useAuth from '../../../hooks/useAuth';
+import { useHttp } from '../../../hooks/useHttp';
 
 const ConsoleWindowLoader = () => {
   const {request} = useHttp();

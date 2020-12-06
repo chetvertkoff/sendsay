@@ -1,10 +1,10 @@
 import React, { useEffect, useState }  from 'react';
-import AuthForm from '../Components/AuthForm';
 import { useHttp } from '../hooks/useHttp';
-import Logo from './../Components/Logo';
 import getModel from './../Models/index';
 import Cookies from 'js-cookie';
 import { useHistory } from 'react-router-dom';
+import AuthForm from './../Components/Auth/AuthForm';
+import Logo from './../Components/UI/Logo';
 
 const Auth = ()=>{
   const {request} = useHttp();

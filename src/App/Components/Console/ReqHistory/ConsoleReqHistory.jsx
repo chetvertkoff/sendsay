@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { connect } from 'react-redux';
 import ConsoleReqHistoryItem from './ConsoleReqHistoryItem';
-import ConsoleClearButton from './UI/ConsoleClearButton';
+import ConsoleClearButton from './../../UI/ConsoleClearButton';
 
 const ConsoleReqHistory = (props) => {
   const [currentId, setID] = useState(null);

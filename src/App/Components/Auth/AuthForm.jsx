@@ -1,9 +1,9 @@
 import React, { useState }  from 'react';
-import Validate from '../utils/validate';
-import Button from './UI/Button';
-import MessageErr from './UI/MessageErr';
-import TextInput from './UI/TextInput';
-import getModel from './../Models';
+import Validate from '../../utils/validate';
+import Button from '../UI/Button';
+import MessageErr from '../UI/MessageErr';
+import TextInput from '../UI/TextInput';
+import getModel from '../../Models';
 
 const AuthForm = props => {
 

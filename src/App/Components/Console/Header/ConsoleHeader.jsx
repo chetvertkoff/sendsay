@@ -1,7 +1,7 @@
 import fscreen from 'fscreen';
 import React, { useCallback, useEffect, useState } from 'react';
-import useAuth from '../hooks/useAuth';
-import Logo from './Logo';
+import useAuth from '../../../hooks/useAuth';
+import Logo from './../../UI/Logo';
 
 const ConsoleHeader = props => {
   const [isFullscreen, setFullScreen] = useState(false);

@@ -5,6 +5,7 @@ import "ace-builds/src-min-noconflict/mode-json";
 import "ace-builds/src-min-noconflict/theme-github";
 
 const ConsoleEditor = props => {
+
   return (
     <td className={`console__editor-wrap ${props.err && "console__editor-wrap_err" || ""}`}>
       <span className="console__editor-title">{props.title}</span>
@@ -21,7 +22,7 @@ const ConsoleEditor = props => {
             useWorker: false,
             fontSize: 14
           }}
-          onChange={props.getDataEditor}
+          onChange={props.onChange}
         />
       </div>
     </td>

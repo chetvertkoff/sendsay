@@ -19,7 +19,6 @@ const App = ()=>{
 
   const isAuth = useCallback(() => {
     if(isAuthorized()) {
-      console.log('render');
       return (
         <>
           <Route path="/" exact component={Console} />
