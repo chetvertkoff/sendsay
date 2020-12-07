@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {compose} from 'redux'
 // import { Provider, useSelector, useDispatch } from './react-redux';
 // import {createStore} from 'redux'
 // Slomux - реализация Flux, в которой, как следует из названия, что-то сломано.
@@ -10,7 +11,6 @@ import ReactDOM from 'react-dom';
 let ReactReduxContext
 
 export const createStore = (reducer, initialState, enhancer) => {
-
   if(typeof initialState === 'function' && typeof enhancer === 'undefined' ){
     enhancer = initialState
     initialState = undefined
@@ -29,7 +29,6 @@ export const createStore = (reducer, initialState, enhancer) => {
     listeners.forEach(listener => listener())
     return action
   }
-
   const subscribe = listener => listeners.push(listener)
 
   return { getState, dispatch, subscribe }
@@ -38,15 +37,14 @@ export const createStore = (reducer, initialState, enhancer) => {
 export const applyMiddleware = (...middlewares) => {
   return createStore => (reducer, preloadedState) => {
     const store = createStore(reducer, preloadedState)
-    let dispatch = store.dispatch
+    let dispatch
 
     const middlewareAPI = {
       getState: store.getState,
       dispatch: action => dispatch(action)
     } 
     const chain = middlewares.map(middleware => middleware(middlewareAPI))
-    dispatch = chain[0]()(store.dispatch)
-
+    dispatch = chain[0](store.dispatch)
     return { 
       ...store,
       dispatch
@@ -56,7 +54,6 @@ export const applyMiddleware = (...middlewares) => {
 
 export const useSelector = selector => {
   const {store} = React.useContext(ReactReduxContext)
-
   const [, update] = React.useState();
 
   const prevSelector = React.useRef()
@@ -101,7 +98,6 @@ export const useDispatch = () => {
 export const Provider = ({ store, context, children }) => {
   const Context = context || React.createContext()
   ReactReduxContext = Context
-  console.log(ReactReduxContext);
   return <Context.Provider value={{ store }}>{children}</Context.Provider>
 }
 

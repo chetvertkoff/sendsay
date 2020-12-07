@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch } from '../../../../react-redux';
 import useAuth from '../../../hooks/useAuth';
 import { showModal } from '../../../Store/Action/consoleModal';
 import { getReqData, sendReqData } from '../../../Store/Action/consoleRequest';

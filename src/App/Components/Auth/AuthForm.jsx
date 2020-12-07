@@ -6,7 +6,6 @@ import TextInput from '../UI/TextInput';
 import getModel from '../../Models';
 
 const AuthForm = props => {
-
   const [state, setState] = useState({
     fields:{
       login: getModel('FormFields'),
