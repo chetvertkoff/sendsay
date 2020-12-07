@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../../../react-redux/';
 import ConsoleEditor from '../../UI/ConsoleEditor';
 import { getReqData } from '../../../Store/Action/consoleRequest';
 

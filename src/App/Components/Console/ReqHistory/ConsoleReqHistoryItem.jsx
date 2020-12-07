@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { connect } from 'react-redux';
+import React, { useCallback, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import useAuth from '../../../hooks/useAuth';
 import { showModal } from '../../../Store/Action/consoleModal';
 import { getReqData, sendReqData } from '../../../Store/Action/consoleRequest';
@@ -11,6 +11,7 @@ const ConsoleReqHistoryItem = props => {
   let classes = ['req-item__inner', classIndicator];
   const [copyClass, setClass] = useState('');
   const {logOut} = useAuth();
+  const dispatch = useDispatch();
 
   const copyText = () => {
     const copyReq = JSON.stringify({...item, isErr: undefined});
@@ -33,26 +34,26 @@ const ConsoleReqHistoryItem = props => {
   }
 
   const deleteReqItem = ()=>{
-    props.showModal({
+    dispatch(showModal({
       showModal: true,
       title: `Удалить ${item.action} ?`,
       actionId: item.actionId
-    });
+    }));
   }
 
   const fulfilReq = useCallback(()=>{
     const req = fillReqField();
-    sendReqData(req);
+    sendReqDataAsync(req);
   },[]);
 
   const fillReqField = ()=>{
     const formattedText = JSON.stringify({action: item.action}, null, 2);
-    props.getReqData(formattedText);
+    dispatch(getReqData(formattedText));
     return formattedText;
   }
 
-  const sendReqData = async (req) =>{
-    const res = await props.sendReqData(req);
+  const sendReqDataAsync = async (req) =>{
+    const res = await dispatch(sendReqData(req));
     if(res == "logout") logOut();
   }
 
@@ -81,10 +82,4 @@ const ConsoleReqHistoryItem = props => {
   );
 }
 
-const mapDispatchToProps = dispatch => ({
-  getReqData: val=>dispatch(getReqData(val)),
-  sendReqData: val=>dispatch(sendReqData(val)),
-  showModal: val=>dispatch(showModal(val))
-})
-
-export default connect(null, mapDispatchToProps)(ConsoleReqHistoryItem);
+export default ConsoleReqHistoryItem;

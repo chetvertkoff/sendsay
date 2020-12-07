@@ -1,9 +1,10 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { connect } from 'react-redux';
 import ConsoleReqHistoryItem from './ConsoleReqHistoryItem';
-import ConsoleClearButton from './../../UI/ConsoleClearButton';
+import ConsoleClearButton from './ConsoleClearButton';
+import { useSelector } from '../../../../react-redux/';
 
-const ConsoleReqHistory = (props) => {
+const ConsoleReqHistory = () => {
+  const reqHistory = useSelector(state => state.consoleReqHistory.reqHistory);
   const [currentId, setID] = useState(null);
   const el = useRef(null);
   const droppedClasses = ['console__req-list'];
@@ -66,7 +67,7 @@ const ConsoleReqHistory = (props) => {
         onClick={setDrop}
         ref={el}
       >
-      {[...props.reqHistory].reverse().map((el, i) =>{
+      {[...reqHistory].reverse().map((el, i) =>{
         return <ConsoleReqHistoryItem 
           key={i} 
           i={i} 
@@ -75,13 +76,9 @@ const ConsoleReqHistory = (props) => {
         />
       })}
       </ul>
-      {props.reqHistory?.length && <ConsoleClearButton /> || null }
+      {reqHistory?.length && <ConsoleClearButton /> || null }
     </div>
   );
 }
 
-const mapStateToProps = state => ({
-  reqHistory: state.consoleReqHistory.reqHistory
-})
-
-export default connect(mapStateToProps, null)(ConsoleReqHistory);
+export default ConsoleReqHistory;

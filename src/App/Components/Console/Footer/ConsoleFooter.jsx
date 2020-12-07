@@ -3,6 +3,7 @@ import FormatButton from './FormatButton';
 import SubmitButton from './SubmitButton';
 
 const ConsoleFooter = () => {
+
   return (
     <div className="console__footer footer console_block">
       <SubmitButton />

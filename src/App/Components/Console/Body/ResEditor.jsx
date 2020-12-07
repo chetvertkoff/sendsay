@@ -1,6 +1,6 @@
 import React from 'react';
 import ConsoleEditor from '../../UI/ConsoleEditor';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../../../react-redux/';
 
 const ResEditor = () => {
   const resData = useSelector(state => state.consoleRequest.resData);

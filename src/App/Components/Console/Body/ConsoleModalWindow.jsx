@@ -1,5 +1,5 @@
 import React, { memo, useEffect, useRef, useState } from 'react';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from '../../../../react-redux/';
 import { closeModal } from '../../../Store/Action/consoleModal';
 import { deleteHistory, deleteReqHistoryItem } from '../../../Store/Action/consoleReqHistory';
 import Button from '../../UI/Button';
@@ -8,17 +8,19 @@ const shouldComponentUpdate  = (prev, next) => {
   return !!prev.modal.title === next.modal.title;
 }
 
-const ConsoleModalWindow = memo(props => {
-  const item = props?.modal;
+const ConsoleModalWindowInit = memo(props => {
+  const item = props.modal;
   if(!item.title) return null;
+
   const el = useRef();
   const [classes, setClasses] = useState(['console__modal', 'modal-window', 'modal-window_open']);
+  const dispatch = useDispatch();
 
   const closeWindow = () =>{
     const openWindowClass = [...classes, 'modal-window_close'];
     setClasses(openWindowClass);
     setTimeout(() => {
-      props.closeModal();
+      dispatch(closeModal());
     }, 450);
     document.removeEventListener("click", handleCLickOutside);
     document.removeEventListener("keydown", handleEscapeOutside);
@@ -26,9 +28,9 @@ const ConsoleModalWindow = memo(props => {
 
   const remove = () => {
     if(item.actionId){
-      props.deleteReqHistoryItem(item.actionId);
+      dispatch(deleteReqHistoryItem(item.actionId));
     }else {
-      props.deleteHistory();
+      dispatch(deleteHistory());
     }
     closeWindow();
   }
@@ -58,16 +60,16 @@ const ConsoleModalWindow = memo(props => {
           <Button 
             title="Удалить"
             classes={["button-danger"]}
-            onClick={()=>remove()}
+            onClick={() => remove()}
           />
           <Button 
             title="Отменить"
             classes={["button-cancel"]}
-            onClick={()=>closeWindow()}
+            onClick={() => closeWindow()}
           />
         </div>
       </div>
-      <button className="modal-window__close-button" onClick={()=>closeWindow()}>
+      <button className="modal-window__close-button" onClick={() => closeWindow()}>
         <svg className="icon modal-window__close-button-icon">
           <use xlinkHref="/assets/icon/sprite.svg#times"></use>
         </svg>
@@ -76,14 +78,10 @@ const ConsoleModalWindow = memo(props => {
   );
 }, shouldComponentUpdate)
 
-const mapStateToProps = state => ({
-  modal: state.consoleModal.modal
-})
+const ConsoleModalWindow = () => {
+  const modal = useSelector(state => state.consoleModal.modal);
 
-const mapDispatchToProps = dispatch => ({
-  closeModal: () => dispatch(closeModal()),
-  deleteHistory: () => dispatch(deleteHistory()),
-  deleteReqHistoryItem: id => dispatch(deleteReqHistoryItem(id))
-})
+  return <ConsoleModalWindowInit modal={modal} />
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(ConsoleModalWindow);
+export default ConsoleModalWindow;

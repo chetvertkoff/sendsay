@@ -1,15 +1,16 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { showModal } from '../../Store/Action/consoleModal';
+import { useDispatch } from 'react-redux';
+import { showModal } from '../../../Store/Action/consoleModal';
 
-const ConsoleClearButton = props => {
-  
+const ConsoleClearButton = () => {
+  const dispatch = useDispatch();
+
   const deleteHistory = () => {
-    props.showModal({
+    dispatch(showModal({
       showModal: true,
       title: `Удалить историю запросов ?`,
       actionId: null
-    })
+    }))
   }
 
   return (
@@ -21,8 +22,4 @@ const ConsoleClearButton = props => {
   );
 }
 
-const mapDispatchToProps = dispatch => ({
-  showModal:val=>dispatch(showModal(val))
-})
-
-export default connect(null, mapDispatchToProps)(ConsoleClearButton);
+export default ConsoleClearButton;

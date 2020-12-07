@@ -1,8 +1,8 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React  from 'react';
+import { useDispatch, useSelector } from '../../../../react-redux/';
 import useAuth from '../../../hooks/useAuth';
 import { sendReqData } from '../../../Store/Action/consoleRequest';
-import validate from '../../../utils/validate';
+import Validate from '../../../utils/validate';
 import Button from './../../UI/Button';
 
 const SubmitButton = () => {
@@ -18,7 +18,8 @@ const SubmitButton = () => {
   }
 
   const submitReq = () => {
-    const isValidRequest = validate.isValidRequest(reqData);
+    const isValidRequest = Validate.isValidRequest(reqData);
+
     if(!isValidRequest){
       dispatch({type:'REQ_ERR', payload: true});
       return;
