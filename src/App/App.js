@@ -1,9 +1,9 @@
 import React, { lazy, Suspense, useCallback } from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom'
-import { applyMiddleware } from 'redux';
-import { createStore, Provider } from '.././react-redux/'
-import thunk from 'redux-thunk'
+// import { applyMiddleware } from 'redux';
+import { createStore, Provider, applyMiddleware, thunk } from '.././react-redux/'
+// import thunk from 'redux-thunk'
 
 import rootReducer from './Store/Reducer/rootReducer';
 import useAuth from './hooks/useAuth';

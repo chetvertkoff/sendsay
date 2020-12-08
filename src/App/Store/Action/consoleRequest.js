@@ -4,7 +4,7 @@ import ResHistory from "../../utils/ResHistory";
 
 const sendsay = new Sendsay();
 
-export const getReqData = val => dispatch => dispatch({type: REQ_DATA, payload: val});
+export const getReqData = val => ({type: REQ_DATA, payload: val});
 
 // {
 //   "action":"issue.send"
@@ -14,7 +14,7 @@ export const getReqData = val => dispatch => dispatch({type: REQ_DATA, payload: 
 //   "action":"sys.settings.get"
 // }
 
-export const sendReqData = val => async dispatch => {
+export const sendReqData = val => async (dispatch) => {
   const parseReq = JSON.parse(val);
   let isErr = false;
   let res;
