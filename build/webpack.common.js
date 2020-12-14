@@ -2,7 +2,7 @@ const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 const PATHS = {
   src: path.join(__dirname, '../src'),
@@ -27,10 +27,14 @@ module.exports = {
     rules: [
     // JS
     {
-      test: /\.(js|jsx)$/,
+      test: /\.(js)$/,
       exclude: /node_modules/,
       use: ['babel-loader'],
-    },{
+    }, {
+      test: /\.vue$/,
+      loader: "vue-loader"
+    },
+    {
       test: /\.(png|jpg|gif|svg)$/,
       loader: 'file-loader',
       options: {
@@ -49,10 +53,15 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ["*", ".jsx", ".js"]
+    extensions: ["*", ".vue", ".js"],
+    alias: {
+      "@": path.join(__dirname, "../src/"),
+      vue$: "vue/dist/vue.js"
+    }
   },
 
   plugins: [
+    new VueLoaderPlugin(),
     new CleanWebpackPlugin(),
     new CopyWebpackPlugin({
       patterns: [
