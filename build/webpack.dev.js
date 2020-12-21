@@ -5,7 +5,7 @@ const baseWebpackConfig = require('./webpack.common');
 const devWebpackConfig = merge(baseWebpackConfig, {
   // DEV config
   mode: 'development',
-  devtool: 'inline-source-map',
+  devtool: 'source-map',
   devServer: {
     historyApiFallback: true,
     contentBase: baseWebpackConfig.externals.paths.dist,
@@ -15,7 +15,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     port: 8080,
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
+    // new webpack.HotModuleReplacementPlugin(),
   ],
 })
 
