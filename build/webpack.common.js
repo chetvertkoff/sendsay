@@ -55,7 +55,7 @@ module.exports = {
   resolve: {
     extensions: ["*", ".vue", ".js"],
     alias: {
-      "@": path.join(__dirname, "../src/"),
+      "@": path.join(__dirname, "../src/App"),
       vue$: "vue/dist/vue.js"
     }
   },
