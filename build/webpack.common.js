@@ -32,7 +32,12 @@ module.exports = {
       use: ['babel-loader'],
     }, {
       test: /\.vue$/,
-      loader: "vue-loader"
+      loader: "vue-loader",
+      options: {
+        loaders: {
+          js: 'babel-loader'
+        }
+      }
     },
     {
       test: /\.(png|jpg|gif|svg)$/,

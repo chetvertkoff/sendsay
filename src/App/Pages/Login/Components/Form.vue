@@ -1,44 +1,61 @@
 <template>
   <form class="form auth__form">
-    <h3 class="form__title">API-консолька</h3>
+    <h3 class="form__title">API-консолька</h3>      
     <TextInput 
       :label="'Логин'"
       :inputType="'text'"
-      :inValid="false"
+      :inValid="fields.login.err"
+      :value="fields.login.val"
+      :getText="val => $on('get-text', getFieldVal({val, type: 'login'}))"
     />
     <TextInput 
       :label="'Сублогин'"
       :inputType="'text'"
-      :inValid="false"
+      :inValid="fields.sublogin.err"
       :optionText="'Опционально'"
+      :value="fields.sublogin.val"
+      :getText="val => $on('get-text', getFieldVal({val, type: 'sublogin'}))"
     />
     <TextInput 
-      :label="'Логин'"
+      :label="'Пароль'"
       :inputType="'text'"
-      :inValid="false"
+      :inValid="fields.password.err"
+      :value="fields.password.val"
+      :getText="val => $on('get-text', getFieldVal({val, type: 'password'}))"
     />
-    <label class="label form__label false">
-      <span class="label__text label__text_left">Логин</span>
-      <input type="text" class="form__input-text" value="">
-    </label>
-    <label class="label form__label false">
-      <span class="label__text label__text_left">Сублогин</span>
-      <span class="label__text label__text_right label__text_option">Опционально</span>
-      <input type="text" class="form__input-text" value="">
-    </label>
-    <label class="label form__label false">
-      <span class="label__text label__text_left">Пароль</span>
-      <input type="password" class="form__input-text" value="">
-    </label>
-
+    <Button />
   </form>
 </template>
 
 <script>
   import TextInput from '@/UI/TextInput'
   import Button from '@/UI/Button'
+  import getModel from '@/Models/'
+  import Validate from '@/utils/Validate'
 
   export default {
-    components: {TextInput, Button}
+    data() {
+      return {
+        fields: {
+          login: getModel('FormFields'),
+          sublogin: getModel('FormFields'),
+          password: getModel('FormFields')
+        },
+        isErr: false
+      }
+    },
+    components: {TextInput, Button},
+    methods: {
+      getFieldVal (obj) {
+        const {type, val, err} = Validate.isValidField(obj);
+        let fields = {...this.fields};
+        let isErr = false;
+        fields[type] = {val, err};
+        for(let field in fields) {
+          if(fields[field].err) isErr = true;
+        }
+        // setState({fields, isErr});
+      }
+    }
   }
 </script>
