@@ -1,15 +1,20 @@
 <template>
   <button :class="classNames" @click="e => $emit('on-click', e)" >
-    <span class="button__text">{{title}}</span>
+    <Loader v-if="isLoad" />
+    <span v-else class="button__text">{{title}}</span>
   </button>
 </template>
 
 <script>
+  import Loader from './Loader'
+
   export default {
+    components: {Loader},
     props: {
       disabled: Boolean,
       title: String,
-      classes: Array
+      classes: Array,
+      isLoad: Boolean
     },
     data(){
       return {

@@ -1,6 +1,7 @@
 <template>
   <form class="form auth__form">
-    <h3 class="form__title">API-консолька</h3>      
+    <h3 class="form__title">API-консолька</h3>   
+    <MessageErr v-if="errMessage" :errMessage="errMessage" />   
     <TextInput 
       :label="'Логин'"
       :inputType="'text'"
@@ -27,6 +28,7 @@
       :disabled="isErr"
       :title="'Войти'" 
       :classes="['form__button']"
+      :isLoad="isLoad"
       @on-click="getFormData"
     />
   </form>
@@ -35,10 +37,15 @@
 <script>
   import TextInput from '@/UI/TextInput'
   import Button from '@/UI/Button'
+  import MessageErr from '@/UI/MessageErr'
   import getModel from '@/Models/'
   import Validate from '@/utils/Validate'
 
   export default {
+    props: {
+      isLoad: Boolean,
+      errMessage: String
+    },
     data() {
       return {
         fields: {
@@ -49,7 +56,7 @@
         isErr: false
       }
     },
-    components: {TextInput, Button},
+    components: {TextInput, Button, MessageErr},
     methods: {
       getFieldVal(obj) {
         const {type, val, err} = Validate.isValidField(obj);
@@ -67,7 +74,7 @@
       getFormData(event) {
         event.preventDefault();
         const {fields, isErr} = Validate.isValidForm({fields: this.fields, isErr: this.isErr});
-        
+
         if(!isErr) {
           this.$emit('submit-auth-form', fields);
         }
