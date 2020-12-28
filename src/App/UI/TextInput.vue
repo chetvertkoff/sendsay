@@ -1,5 +1,5 @@
 <template>
-  <label class="label form__label false">
+  <label class="label form__label" :class="{'label_invalid': inValid}">
     <span class="label__text label__text_left">{{label}}</span>
     <span 
       v-if="optionText" 
@@ -10,8 +10,7 @@
     <input 
       :type="inputType" 
       class="form__input-text" 
-      :value="value || ''"
-      @change="e => $emit('get-text', getText(e.target.value))"
+      v-model="text"
     />
   </label>
 </template>
@@ -25,6 +24,16 @@
       inValid: Boolean,
       value: String,
       getText: Function
+    },
+    data(){
+      return {
+        text: this.value
+      }
+    },
+    watch: {
+      text(val){
+        this.$emit('get-text', val);
+      }
     }
   }
 </script>

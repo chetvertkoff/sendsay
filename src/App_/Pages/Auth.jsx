@@ -28,7 +28,7 @@ const Auth = ()=>{
     return res;
   }
 
-  const onSubmitForm = (formFields)=>{
+  const onSubmitForm = (formFields) => {
     const fields = getModel('AuthFields', formFields);
     Promise.resolve(reqLogin(fields))
      .then(res=>{

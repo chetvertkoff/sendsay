@@ -37,6 +37,7 @@ const AuthForm = props => {
     }
     setState({...validatedState, isErr: true});
   }
+  
   return(
     <form className="form auth__form">
       <h3 className="form__title">API-консолька</h3>
