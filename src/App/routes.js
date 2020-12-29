@@ -5,8 +5,8 @@ import Console from './Pages/Console/Console'
 const routes = {
   mode: 'history',
   routes: [
-  { path: '/', component: Console },
-  { path: '/login', component: Login },
+    { path: '/', component: Console },
+    { path: '/login', component: Login },
   ],
   linkActiveClass: "active",
   linkExactActiveClass: "active",

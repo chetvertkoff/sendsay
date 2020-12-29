@@ -1,7 +1,7 @@
 <template>
 <section class="auth">
   <div class="auth__container">
-    <Logo />
+    <Logo :parentClass="'auth__logo'" />
     <Form 
       :isLoad="isLoad"
       :errMessage="errMessage"
@@ -13,10 +13,15 @@
 </template>
 
 <script>
+  import router from 'vue'
+  import Cookies from 'js-cookie'
   import Logo from '@/UI/Logo'
   import Form from './Components/Form'
   import getModel from '@/Models'
   import http from '@/utils/http'
+
+  // Логин: chetvertkoffkirill@gmail.com
+  // Пароль: sa9Niqueng
 
   export default {
     components: {Logo, Form},
@@ -39,7 +44,7 @@
             return;
           }
           if(!this.errMessage) this.errMessage = "";
-          // history.push('/');  
+          this.$router.push('/');
         })
       },
       async reqLogin(fields) {

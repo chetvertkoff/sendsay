@@ -1,9 +1,13 @@
 <template>
-  <h1>Console</h1>
+  <section class="console">
+    <ConsoleHeader />
+  </section>
 </template>
 
 <script>
-export default {
-
-}
+  import ConsoleHeader from './Components/ConsoleHeader' 
+  export default {
+    components: {ConsoleHeader},
+    
+  }
 </script>

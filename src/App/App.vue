@@ -5,9 +5,14 @@
 </template>
 
 <script>
+  import Cookies from 'js-cookie';
+
   export default {
-    beforeCreate(){
-      
+    created(){
+      const hasSess = !!Cookies.get('sendsay_session');
+      const isEqualPath = !!(this.$route.path == '/login');
+
+      if(!hasSess && !isEqualPath) this.$router.push('/login');
     }
   }
 </script>

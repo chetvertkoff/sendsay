@@ -2,7 +2,7 @@
   <div class="message form__message">
     <div class="message__left-block">
       <svg class="icon icon_smile">
-          <use xlinkHref="/assets/icon/sprite.svg#smile"></use>
+          <use xlink:href="/assets/icon/sprite.svg#smile"></use>
       </svg>
     </div>
     <div class="message__right-block">
