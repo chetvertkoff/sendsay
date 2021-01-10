@@ -61,11 +61,11 @@ const ConsoleResize = () => {
     e.preventDefault();
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     onStart();
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', endDrag);
-    return ()=>{
+    return () => {
       document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseup', endDrag);
     }
