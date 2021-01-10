@@ -45,6 +45,7 @@
       },
       toggleFullscreen() {
         const el = this.$parent.$el;
+        
         if(!fscreen.fullscreenElement){
           fscreen.requestFullscreen(el);
         }else{
