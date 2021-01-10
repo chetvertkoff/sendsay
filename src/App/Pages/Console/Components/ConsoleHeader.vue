@@ -13,8 +13,8 @@
         <use xlink:href="/assets/icon/sprite.svg#log-out"></use>
       </svg>
     </button>
-    <div className="console__fullscreen-button" onClick={toggleFullscreen}>
-      <svg className="icon">
+    <div class="console__fullscreen-button" @click="toggleFullscreen">
+      <svg class="icon">
         <use 
           :xlink:href="`/assets/icon/sprite.svg#fullscreen-${isFullscreen ? 'on' : 'off' }`"
         ></use>
@@ -26,6 +26,7 @@
 <script>
   import Logo from '@/UI/Logo'
   import logout from '@/utils/logout'
+  import fscreen from 'fscreen'
 
   export default {
     components: {
@@ -41,10 +42,25 @@
       logOut() {
         logout()
          .then(() => this.$router.push('/login'))
+      },
+      toggleFullscreen() {
+        const el = this.$parent.$el;
+        if(!fscreen.fullscreenElement){
+          fscreen.requestFullscreen(el);
+        }else{
+          fscreen.exitFullscreen();
+        }
+      },
+      fullScreenEvent() {
+        this.isFullscreen = !!fscreen.fullscreenElement;
       }
     },
     created() {
       this.userInfo = JSON.parse(localStorage.getItem('user_info'));
+      fscreen.addEventListener('fullscreenchange', this.fullScreenEvent);
+    },
+    destroyed() {
+      fscreen.removeEventListener('fullscreenchange', this.fullScreenEvent);
     }
   }
 </script>
