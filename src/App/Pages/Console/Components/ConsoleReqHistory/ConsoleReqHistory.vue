@@ -4,23 +4,31 @@
       class="console__req-list" 
       :class="{'console__req-list_dropped': currentId != null}"
     >
-    <template v-for="(el, i) in reqHistory">
-      <ConsoleReqHistoryItem :key="i"/>
+    <template v-for="(el, i) in reqHistoryData">
+      <ConsoleReqHistoryItem 
+        :key="i" 
+        :itemId="i"
+        :item="el"
+      />
     </template>
     </ul>
   </div>
 </template>
 
 <script>
-  import ConsoleReqHistoryItem from './ConsoleReqHistoryItem'
+  import ConsoleReqHistoryItem from './ConsoleReqHistoryItem/ConsoleReqHistoryItem'
+  import { mapGetters, mapState } from 'vuex';
 
   export default {
     components: {ConsoleReqHistoryItem},
-    data(){
+    data() {
       return {
         currentId: null,
         reqHistory: null
       }
+    },
+    computed: {
+      ...mapGetters(['reqHistoryData'])
     }
   }
 </script>

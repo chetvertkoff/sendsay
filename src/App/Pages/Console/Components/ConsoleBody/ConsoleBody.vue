@@ -5,10 +5,24 @@
         <tr>
           <ConsoleEditor 
             :name="'REQ'"
+            :title="'Запрос:'"
+            :options="{
+              showGutter: false,
+              highlightActiveLine: false,
+              printMargin: false
+            }"
           />
           <ConsoleResize />
           <ConsoleEditor 
             :name="'RES'"
+            :title="'Ответ:'"
+            :options="{
+              showGutter: false,
+              highlightActiveLine: false,
+              printMargin: false,
+              readOnly: true,
+              showPrintMargin: false
+            }"
           />
         </tr>
       </tbody>

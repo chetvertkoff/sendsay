@@ -1,6 +1,9 @@
 import VueRouter from 'vue-router'
+import Vue from 'vue'
 import Login from './Pages/Login/Login'
 import Console from './Pages/Console/Console'
+
+Vue.use(VueRouter)
 
 const routes = {
   mode: 'history',

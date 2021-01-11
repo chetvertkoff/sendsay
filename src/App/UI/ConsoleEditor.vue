@@ -14,7 +14,8 @@
     props: {
       name: String,
       content: String,
-      title: String
+      title: String,
+      options: Object
     },
     data() {
       return {
@@ -25,21 +26,27 @@
     watch: {
       content(val) {
         if (this.beforeContent !== val) {
-          this.editor.setValue(val, 1)
+          this.editor.setValue(val, "")
         }
       }
     },
-    mounted(){  
+    mounted() {  
       this.editor = window.ace.edit(this.name);
-      const content = this.content || "a"
+      const content = this.content || " "
       this.editor.setValue(content, 1);
       
-      this.editor.getSession().setMode(`ace/mode/json`)
-      this.editor.setTheme(`ace/theme/github`)
+      this.editor.getSession().setMode(`ace/mode/json`);
+      this.editor.setTheme(`ace/theme/github`);
+
+      this.editor.setOptions({
+        ...this.options,
+        useWorker: false,
+        fontSize: 14
+      })
 
       this.editor.on('change', () => {
-        this.beforeContent = this.editor.getValue()
-        this.$emit('change-content', this.editor.getValue())
+        this.beforeContent = this.editor.getValue();
+        this.$emit('change-content', this.editor.getValue());
       })
     }
   }
