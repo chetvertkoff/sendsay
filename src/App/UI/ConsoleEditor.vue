@@ -1,5 +1,5 @@
 <template>
-  <td class="console__editor-wrap">
+  <td class="console__editor-wrap" :class="{'console__editor-wrap_err': err}">
     <span class="console__editor-title">{{title}}</span>
     <div class="console__editor">
       <div :id="name" style="width: 100%; height: 100%;"></div>
@@ -15,24 +15,22 @@
       name: String,
       content: String,
       title: String,
-      options: Object
+      options: Object,
+      err: Boolean
     },
     data() {
       return {
-        editor: Object,
-        beforeContent: ""
+        editor: Object
       }
     },
     watch: {
       content(val) {
-        if (this.beforeContent !== val) {
-          this.editor.setValue(val, "")
-        }
+        this.editor.setValue(val, 1);
       }
     },
     mounted() {  
       this.editor = window.ace.edit(this.name);
-      const content = this.content || " "
+      const content = this.content || ""
       this.editor.setValue(content, 1);
       
       this.editor.getSession().setMode(`ace/mode/json`);
@@ -45,7 +43,6 @@
       })
 
       this.editor.on('change', () => {
-        this.beforeContent = this.editor.getValue();
         this.$emit('change-content', this.editor.getValue());
       })
     }

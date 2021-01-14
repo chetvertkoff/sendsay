@@ -5,8 +5,9 @@ export default async function http (req) {
 
   try {
     sendsay.setSessionFromCookie();
-    const action = req.action;
+    const {action} = req;
     const response = await sendsay.request({...req, action});
+    
     return response;
   } catch (e) {
     return e;

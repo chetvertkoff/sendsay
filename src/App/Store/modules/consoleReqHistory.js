@@ -8,8 +8,24 @@ const getters = {
   reqHistoryData: state => state.reqHistoryData.reverse()
 }
 
+//actions
+const actions = {
+  setReqHistoryData({commit}, val) {
+    commit('REQ_HISTORY', val);
+  }
+}
+
+//mutations
+const mutations = {
+  REQ_HISTORY(state, val) {
+    state.reqHistoryData = val;
+  }
+}
 
 export default {
+  namespaces: true,
   state,
-  getters
+  getters,
+  actions,
+  mutations
 }

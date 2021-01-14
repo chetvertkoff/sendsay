@@ -3,27 +3,9 @@
     <table class="body__table">
       <tbody>
         <tr>
-          <ConsoleEditor 
-            :name="'REQ'"
-            :title="'Запрос:'"
-            :options="{
-              showGutter: false,
-              highlightActiveLine: false,
-              printMargin: false
-            }"
-          />
+          <ReqEditor />
           <ConsoleResize />
-          <ConsoleEditor 
-            :name="'RES'"
-            :title="'Ответ:'"
-            :options="{
-              showGutter: false,
-              highlightActiveLine: false,
-              printMargin: false,
-              readOnly: true,
-              showPrintMargin: false
-            }"
-          />
+          <ResEditor />
         </tr>
       </tbody>
     </table>
@@ -31,10 +13,15 @@
 </template>
 
 <script>
-  import ConsoleEditor from '@/UI/ConsoleEditor'
-  import ConsoleResize from './ConsoleResize'
+  import ConsoleResize from './Components/ConsoleResize'
+  import ResEditor from './Components/ResEditor.vue'
+  import ReqEditor from './Components/ReqEditor.vue'
   
   export default {
-    components: {ConsoleEditor, ConsoleResize}
+    components: {
+      ConsoleResize,
+      ResEditor,
+      ReqEditor
+    }
   }
 </script>

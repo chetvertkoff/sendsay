@@ -29,9 +29,7 @@
   import fscreen from 'fscreen'
 
   export default {
-    components: {
-      Logo
-    },
+    components: {Logo},
     data() {
       return {
         userInfo: {login:'', sublogin: ''},
