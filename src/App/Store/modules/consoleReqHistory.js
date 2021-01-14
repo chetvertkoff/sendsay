@@ -1,3 +1,5 @@
+import { REQ_HISTORY } from './../types';
+
 //state
 const state = {
   reqHistoryData: JSON.parse(localStorage.getItem('reqItems')) || []
@@ -17,7 +19,7 @@ const actions = {
 
 //mutations
 const mutations = {
-  REQ_HISTORY(state, val) {
+  [REQ_HISTORY](state, val) {
     state.reqHistoryData = val;
   }
 }

@@ -1,5 +1,6 @@
 import Sendsay from 'sendsay-api'
 import ResHistory from '../../utils/ResHistory' 
+import { REQ_DATA, RES_DATA, REQ_ERR, RES_ERR, REQ_LOADING } from '../types';
 
 const sendsay = new Sendsay();
 
@@ -58,20 +59,20 @@ const actions = {
 
 //mutations
 const mutations = {
-  REQ_DATA(state, val) {
+  [REQ_DATA](state, val) {
     state.reqData = val;
   },
-  RES_DATA(state, val) {
+  [RES_DATA](state, val) {
     state.resData = val;
     state.loading = false;
   },
-  REQ_ERR(state, val) {
+  [REQ_ERR](state, val) {
     state.reqErr = val;
   },
-  RES_ERR(state, val) {
+  [RES_ERR](state, val) {
     state.resErr = val;
   },
-  REQ_LOADING(state, val) {
+  [REQ_LOADING](state, val) {
     state.loading = val;
   }
 }
