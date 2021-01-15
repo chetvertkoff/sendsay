@@ -16,7 +16,7 @@ const ConsoleModalWindowInit = memo(props => {
   const [classes, setClasses] = useState(['console__modal', 'modal-window', 'modal-window_open']);
   const dispatch = useDispatch();
 
-  const closeWindow = () =>{
+  const closeWindow = () => {
     const openWindowClass = [...classes, 'modal-window_close'];
     setClasses(openWindowClass);
     setTimeout(() => {

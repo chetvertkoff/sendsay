@@ -5,15 +5,17 @@
     <ConsoleBody />
     <ConsoleFooter />
     <ConsoleWindowLoader />
+    <ConsoleModalWindow />
   </section>
 </template>
 
 <script>
-  import ConsoleHeader from './Components/ConsoleHeader'
-  import ConsoleReqHistory from './Components/ConsoleReqHistory/ConsoleReqHistory'
-  import ConsoleBody from './Components/ConsoleBody/ConsoleBody'
-  import ConsoleFooter from './Components/ConsoleFooter/ConsoleFooter'
-  import ConsoleWindowLoader from './Components/ConsoleWindowLoader'
+  import ConsoleHeader from './ConsoleHeader'
+  import ConsoleReqHistory from './ConsoleReqHistory'
+  import ConsoleBody from './ConsoleBody'
+  import ConsoleFooter from './ConsoleFooter'
+  import ConsoleWindowLoader from './ConsoleWindowLoader'
+  import ConsoleModalWindow from '../../UI/ConsoleModalWindow/ConsoleModalWindow'
 
   export default {
     components: {
@@ -21,7 +23,8 @@
       ConsoleReqHistory,
       ConsoleBody,
       ConsoleFooter,
-      ConsoleWindowLoader
+      ConsoleWindowLoader,
+      ConsoleModalWindow
     },
     
   }

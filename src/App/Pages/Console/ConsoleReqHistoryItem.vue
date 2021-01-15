@@ -26,7 +26,7 @@
 </template>
 
 <script>
-  import ReqDropCard from './Components/ReqDropCard'
+  import ReqDropCard from './ReqDropCard'
   
   export default {
     components: {ReqDropCard},
@@ -61,7 +61,8 @@
         }, 500);
       },
       fulfilReq() {
-        console.log('fulfilReq');
+        const reqData = this.fillReqField();
+        this.$store.dispatch('sendReqData', reqData);
       },
       fillReqField() {
         const formattedText = JSON.stringify({action: this.item.action}, null, 2);
@@ -69,7 +70,11 @@
         return formattedText;
       },
       deleteReqItem() {
-        console.log('deleteReqItem');
+        this.$store.dispatch('showModal', {
+          showModal: true,
+          title: `Удалить ${this.item.action} ?`,
+          actionId: this.item.actionId
+        });
       }
     }
   }

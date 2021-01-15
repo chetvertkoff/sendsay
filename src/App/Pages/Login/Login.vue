@@ -16,7 +16,7 @@
   import router from 'vue'
   import Cookies from 'js-cookie'
   import Logo from '@/UI/Logo'
-  import Form from './Components/Form'
+  import Form from './Form'
   import getModel from '@/Models'
   import http from '@/utils/http'
 

@@ -7,8 +7,8 @@
 </template>
 
 <script>
-  import SubmitButton from './Components/SubmitButton'
-  import FormatButton from './Components/FormatButton'
+  import SubmitButton from './SubmitButton'
+  import FormatButton from './FormatButton'
 
   export default {
     components: {SubmitButton, FormatButton}

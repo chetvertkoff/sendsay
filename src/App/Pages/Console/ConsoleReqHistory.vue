@@ -21,8 +21,8 @@
 
 <script>
   import { mapGetters, mapState } from 'vuex';
-  import ConsoleReqHistoryItem from './Components/ConsoleReqHistoryItem'
-  import ConsoleClearButton from './Components/ConsoleClearButton'
+  import ConsoleReqHistoryItem from './ConsoleReqHistoryItem'
+  import ConsoleClearButton from './ConsoleClearButton'
 
   export default {
     components: {ConsoleReqHistoryItem, ConsoleClearButton},

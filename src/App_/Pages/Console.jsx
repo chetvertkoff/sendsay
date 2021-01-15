@@ -8,7 +8,7 @@ import ConsoleWindowLoader from '../Components/Console/Body/ConsoleWindowLoader'
 
 const Console = () => {
   const el = useRef(null);
-  return(
+  return (
     <section className="console" ref={el}>
       <ConsoleHeader el={el} />
       <ConsoleReqHistory />

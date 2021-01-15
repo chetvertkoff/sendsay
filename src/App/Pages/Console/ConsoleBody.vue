@@ -13,9 +13,9 @@
 </template>
 
 <script>
-  import ConsoleResize from './Components/ConsoleResize'
-  import ResEditor from './Components/ResEditor.vue'
-  import ReqEditor from './Components/ReqEditor.vue'
+  import ConsoleResize from './ConsoleResize'
+  import ResEditor from './ResEditor.vue'
+  import ReqEditor from './ReqEditor.vue'
   
   export default {
     components: {

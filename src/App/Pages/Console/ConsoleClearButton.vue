@@ -10,7 +10,11 @@
   export default {
     methods: {
       deleteHistory() {
-
+        this.$store.dispatch('showModal', {
+          showModal: true,
+          title: `Удалить историю запросов ?`,
+          actionId: null
+        })
       }
     }
   }
