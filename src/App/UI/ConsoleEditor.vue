@@ -30,8 +30,8 @@
     },
     mounted() {  
       this.editor = window.ace.edit(this.name);
-      const content = this.content || ""
-      this.editor.setValue(content, 1);
+      const content = this.content || "";
+      this.editor.setValue(content, -1);
       
       this.editor.getSession().setMode(`ace/mode/json`);
       this.editor.setTheme(`ace/theme/github`);

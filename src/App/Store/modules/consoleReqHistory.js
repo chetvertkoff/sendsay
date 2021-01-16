@@ -1,13 +1,14 @@
 import { REQ_HISTORY } from './../types';
+import ResHistory from '../../utils/ResHistory'
 
 //state
 const state = {
-  reqHistoryData: JSON.parse(localStorage.getItem('reqItems')) || []
+  reqHistoryData: ResHistory.historyItems
 }
 
 //getters
 const getters = {
-  reqHistoryData: state => state.reqHistoryData.reverse()
+  reqHistoryData: state => state.reqHistoryData
 }
 
 //actions

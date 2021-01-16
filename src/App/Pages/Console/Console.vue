@@ -15,7 +15,7 @@
   import ConsoleBody from './ConsoleBody'
   import ConsoleFooter from './ConsoleFooter'
   import ConsoleWindowLoader from './ConsoleWindowLoader'
-  import ConsoleModalWindow from '../../UI/ConsoleModalWindow/ConsoleModalWindow'
+  import ConsoleModalWindow from '../../UI/ConsoleModalWindow'
 
   export default {
     components: {

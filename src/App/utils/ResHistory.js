@@ -1,8 +1,17 @@
 class ResHistory {
+
   constructor(){
-    this.historyItems = JSON.parse(localStorage.getItem('reqItems')) || [];
+    this._historyItems = JSON.parse(localStorage.getItem('reqItems')) || [];
   }
 
+  get historyItems () {
+    return this._historyItems.reverse();
+  }
+
+  set historyItems (val) {
+    this._historyItems = val;
+  }
+  
   writeResHistory (req, isErr) {
     const fullReq = {...req, isErr};
   
@@ -22,6 +31,7 @@ class ResHistory {
     });
     this.historyItems = [...filteredArr];
     localStorage.setItem('reqItems', JSON.stringify(this.historyItems));
+    console.log(2,this.historyItems);
     return this.historyItems;
   }
 
